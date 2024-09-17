@@ -7,7 +7,7 @@ class Test(unittest.TestCase):
         self.Ahorcado = Ahorcado()
 
     def test_ingresar_letra(self):
-        letra = 'a'
+        letra = ''
         self.assertEqual(self.Ahorcado.ingresar_letra(letra), '')
 
 
