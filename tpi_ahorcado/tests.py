@@ -3,12 +3,12 @@ from Ahorcado import Ahorcado
 
 class Test(unittest.TestCase):
     
-    def setUp(self):
-        self.Ahorcado = Ahorcado()
+    def set_up(self):
+        self.ahorcado = Ahorcado()
 
     def test_ingresar_letra(self):
         letra = ''
-        self.assertEqual(self.Ahorcado.ingresar_letra(letra), '')
+        self.assertEqual(self.ahorcado.ingresar_letra(letra), '')
 
 
 if __name__ ==  '__main__':
