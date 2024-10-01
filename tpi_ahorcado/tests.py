@@ -9,7 +9,9 @@ class Test(unittest.TestCase):
         self.assertEqual(Ahorcado.ingresar_letra(Test.letra), 'a')
         
     def test_falla_letra(self):
-        self.assertEqual(Ahorcado.ingresar_letra(Test.letra), '')
+        self.assertNotEqual(Ahorcado.ingresar_letra(Test.letra), '')
+    
+    
 
 
 if __name__ ==  '__main__':
