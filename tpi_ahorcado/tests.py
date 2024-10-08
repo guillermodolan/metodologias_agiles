@@ -8,7 +8,7 @@ class Test(unittest.TestCase):
     palabra_incorrecta = 'nula'
 
     def test_acierta_letra(self):
-        self.assertEqual(Ahorcado.ingresar_letra(Test.letra), 'a')
+        self.assertEqual(Ahorcado.ingresar_letra(Test.letra), Test.letra)
         
     def test_falla_letra(self):
         self.assertNotEqual(Ahorcado.ingresar_letra(Test.letra), '')
