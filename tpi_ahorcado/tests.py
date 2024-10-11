@@ -25,11 +25,7 @@ class Test(unittest.TestCase):
         self.assertEqual(Ahorcado.ingresar_palabra(Test.palabra_correcta), Test.palabra_correcta)
         
     def test_falla_palabra_correcta(self):
-        self.assertNotEqual(Ahorcado.ingresar_palabra(Test.palabra_incorrecta), Test.palabra_correcta)
-        
-    def nuevo():
-        return ''
-    
+        self.assertNotEqual(Ahorcado.ingresar_palabra(Test.palabra_incorrecta), Test.palabra_correcta)    
     
 if __name__ ==  '__main__':
     unittest.main()  # run all tests
