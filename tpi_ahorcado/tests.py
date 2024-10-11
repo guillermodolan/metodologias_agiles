@@ -27,6 +27,8 @@ class Test(unittest.TestCase):
     def test_falla_palabra_correcta(self):
         self.assertNotEqual(Ahorcado.ingresar_palabra(Test.palabra_incorrecta), Test.palabra_correcta)
         
+    def nuevo():
+        return ''
     
     
 if __name__ ==  '__main__':
