@@ -32,7 +32,7 @@ steps:
   displayName: 'Install dependencies'
 
 - script: |
-    pip install pytest pytest-azurepipelines
+    pip install pytest pytest-azurepipelines C:\metodologias_agiles\tpi_ahorcado\requirements.txt
     pytest
   displayName: 'pytest'
   
