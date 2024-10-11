@@ -1,5 +1,4 @@
 import unittest
-# from Ahorcado import Ahorcado
 from tpi_ahorcado.Ahorcado import Ahorcado
 
 class Test(unittest.TestCase):
