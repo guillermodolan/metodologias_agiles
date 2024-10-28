@@ -3,15 +3,15 @@ from tpi_ahorcado.Ahorcado import Ahorcado
 
 class Test(unittest.TestCase):
     
-    letra = 'a'
-    palabra_correcta = 'prueba'
-    palabra_incorrecta = 'nula'
-
     def test_acierta_letra(self):
-        self.assertEqual(Ahorcado.ingresar_letra(Test.letra), 'Acertaste, ¡seguí así my friend!')
+        letra = 'a'
+        palabra = 'prueba'
+        self.assertEqual(Ahorcado.ingresar_letra(letra, palabra), True)
         
     def test_falla_letra(self):
-        self.assertNotEqual(Ahorcado.ingresar_letra(Test.letra), '')
+        letra = 'g'
+        palabra = 'prueba'
+        self.assertEqual(Ahorcado.ingresar_letra(letra, palabra), False)
         
     def test_falla_letra_descuenta_vida(self):
         Ahorcado.vidas = 6
@@ -22,10 +22,14 @@ class Test(unittest.TestCase):
         self.assertEqual(Ahorcado.descuenta_vida(), 'Perdiste')
         
     def test_acierta_palabra_correcta(self):
-        self.assertEqual(Ahorcado.ingresar_palabra(Test.palabra_correcta), Test.palabra_correcta)
+        palabra_ingresada = 'destino'
+        palabra_correcta = 'destino'
+        self.assertEqual(Ahorcado.ingresar_palabra(palabra_ingresada, palabra_correcta), True)
         
     def test_falla_palabra_correcta(self):
-        self.assertNotEqual(Ahorcado.ingresar_palabra(Test.palabra_incorrecta), Test.palabra_correcta)
+        palabra_ingresada = 'destino'
+        palabra_correcta = 'ficticio'
+        self.assertEqual(Ahorcado.ingresar_palabra(palabra_ingresada, palabra_correcta), False)
         
     def test_adivina_palabra(self):
         self.assertEqual(Ahorcado.adivina_palabra(), 'Ganaste')

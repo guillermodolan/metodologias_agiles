@@ -1,15 +1,18 @@
 class Ahorcado:
     
     # Definimos 6 vidas (cabeza, tronco, brazos y piernas)
-    vidas = 0
+    vida_maxima = 6
     
     @staticmethod
-    def ingresar_letra(letra):
-        return letra
+    def ingresar_letra(letra, palabra):
+        if letra in palabra:
+            return True
+        else:
+            return False
     
     @staticmethod
-    def ingresar_palabra(palabra):
-        return palabra
+    def ingresar_palabra(palabra_ingresada, palabra_correcta):
+        return palabra_correcta == palabra_ingresada
     
     @staticmethod
     def descuenta_vida():
