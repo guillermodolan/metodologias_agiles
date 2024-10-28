@@ -18,3 +18,7 @@ class Ahorcado:
             return Ahorcado.vidas
         else:
             return 'Perdiste'
+        
+    @staticmethod
+    def adivina_palabra():
+        return 'Ganaste'
