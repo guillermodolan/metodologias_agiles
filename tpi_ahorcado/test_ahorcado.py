@@ -20,7 +20,7 @@ class Test(unittest.TestCase):
         Ahorcado.vidas = 6
         letra = 'x'
         palabra = 'perro'
-        Ahorcado.ingresar_letra(letra, palabra)
+        Ahorcado.ingresar_letra(letra, palabra)    
         self.assertEqual(Ahorcado.vidas, 5)
 
     # In progress

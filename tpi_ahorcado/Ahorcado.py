@@ -8,7 +8,7 @@ class Ahorcado:
         if letra in palabra:
             return True
         else:
-            #descuenta_vida()
+            Ahorcado.descuenta_vida()
             return False
     
     @staticmethod
