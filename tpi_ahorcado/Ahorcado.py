@@ -1,19 +1,20 @@
 class Ahorcado:
     
-    # Definimos 6 vidas (cabeza, tronco, brazos y piernas)
+    # Definimos 6 vidas (cabeza, tronco, brazos (2) y piernas (2) )
     vidas = 6
+
+    def __init__(self, palabra):
+        self.palabra = palabra
     
-    @staticmethod
-    def ingresar_letra(letra, palabra):
-        if letra in palabra:
+    def ingresar_letra(self, letra):
+        if letra in self.palabra:
             return True
         else:
             Ahorcado.descuenta_vida()
             return False
     
-    @staticmethod
-    def ingresar_palabra(palabra_ingresada, palabra_correcta):
-        return palabra_correcta == palabra_ingresada
+    def ingresar_palabra(self, palabra_ingresada):
+        return self.palabra == palabra_ingresada
     
     @staticmethod
     def descuenta_vida():

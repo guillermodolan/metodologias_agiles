@@ -1,0 +1,14 @@
+Reunión Andrés 29/10/2024
+
+
+# Mostrar los aciertos al usuario (en la UI). Si ingreso 'a' para la palabra 'prueba', le muestro
+# al usuario "acertaste"
+    
+# Inicializar palabra (en la clase como constructor) y no pasarla como argumento en ningún método.
+
+
+# Si acierto, ver las letras y donde están acertadas
+
+# No permitir ingreso de una letra que ya se ingresó ni caracteres distintos de letras
+
+
