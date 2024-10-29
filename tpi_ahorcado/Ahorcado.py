@@ -13,16 +13,19 @@ class Ahorcado:
             Ahorcado.descuenta_vida()
             return False
     
-    def ingresar_palabra(self, palabra_ingresada):
-        return self.palabra == palabra_ingresada
+    def arriesgar_palabra(self, palabra_ingresada):
+        if not self.palabra == palabra_ingresada:
+            Ahorcado.descuenta_vida()
+            return False
+        return True
     
     @staticmethod
     def descuenta_vida():
         Ahorcado.vidas -= 1
         if Ahorcado.vidas > 0:
-            return Ahorcado.vidas
+            return True
         else:
-            return 'Perdiste'
+            return False
         
     @staticmethod
     def adivina_palabra():
