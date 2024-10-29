@@ -15,7 +15,7 @@ class Test(unittest.TestCase):
         palabra = 'prueba'
         self.assertEqual(Ahorcado.ingresar_letra(letra, palabra), False)
 
-    # In progress
+    # Done
     def test_falla_letra_descuenta_vida(self):
         Ahorcado.vidas = 6
         letra = 'x'
@@ -25,8 +25,11 @@ class Test(unittest.TestCase):
 
     # In progress
     def test_fin_de_vidas(self):
-        Ahorcado.vidas = 0
-        self.assertEqual(Ahorcado.descuenta_vida(), 'Perdiste')
+        Ahorcado.vidas = 1
+        letra = 'x'
+        palabra = 'perro'
+        Ahorcado.ingresar_letra(letra, palabra)    
+        self.assertEqual(Ahorcado.descuenta_vida(), False)
         
     # Done
     def test_acierta_palabra_correcta(self):
