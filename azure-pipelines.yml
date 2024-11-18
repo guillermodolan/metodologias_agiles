@@ -28,18 +28,20 @@ steps:
   displayName: 'Install dependencies'
 
 - script: |
-    pip install pytest pytest-azurepipelines
-    pytest
-  displayName: 'pytest'
+    pip install pytest pytest-cov pytest-azurepipelines
+    pytest --cov=. --cov-report xml
+  displayName: 'Run tests with coverage'
 
-- script: |
-    coverage run -m unittest discover
-    coverage xml
-  displayName: 'Run tests with coverage' 
-  
+- task: PublishTestResults@2
+  inputs:
+    testResultsFiles: '**/test-*.xml'
+    testRunTitle: 'Publish Test Results'
+    testResultsFormat: 'JUnit'
+  displayName: 'Publish test results'
+
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage.xml'
-    reportDirectory: '$(System.DefaultWorkingDirectory)/htmlcov'
-  displayName: 'Publish code coverage results'
+    summaryFileLocation: '$(Build.SourcesDirectory)/coverage.xml'
+    reportDirectory: '$(Build.SourcesDirectory)/coverage-report'
+  displayName: 'Publish Code Coverage Results'
