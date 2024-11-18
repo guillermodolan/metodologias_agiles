@@ -13,10 +13,6 @@ strategy:
   matrix:
     Python38:
       python.version: '3.8'
-    Python39:
-      python.version: '3.9'
-    Python310:
-      python.version: '3.10'
     Python311:
       python.version: '3.11'
 
@@ -35,3 +31,15 @@ steps:
     pip install pytest pytest-azurepipelines
     pytest
   displayName: 'pytest'
+
+- script: |
+    coverage run -m unittest discover
+    coverage xml
+  displayName: 'Run tests with coverage' 
+  
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage.xml'
+    reportDirectory: '$(System.DefaultWorkingDirectory)/htmlcov'
+  displayName: 'Publish code coverage results'
