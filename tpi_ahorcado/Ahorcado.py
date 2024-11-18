@@ -7,6 +7,7 @@ class Ahorcado:
         self.palabra = palabra
         self.letras_adivinadas = []
         self.letras_erradas = []
+        self.fin_de_juego = False
     
     def ingresar_letra(self, letra):
         if letra in self.letras_adivinadas or letra in self.letras_erradas:
@@ -25,7 +26,7 @@ class Ahorcado:
                 print(f'Te quedan {Ahorcado.vidas} vidas')
                 return False
             
-    
+            
     def arriesgar_palabra(self, palabra_ingresada):
         if not self.palabra == palabra_ingresada:
             Ahorcado.descuenta_vida()
@@ -39,10 +40,12 @@ class Ahorcado:
             return True
         else:
             return False
+
         
     @staticmethod
     def adivina_palabra():
         return 'Ganaste'
+
 
     def muestra_palabra(self):
         palabra_actual = ''
@@ -52,3 +55,13 @@ class Ahorcado:
             else:
                 palabra_actual = palabra_actual + '_'
         return palabra_actual
+    
+    
+    def comprueba_fin_de_juego(self):
+        if not '_' in self.muestra_palabra():
+            self.fin_de_juego = True
+        return self.fin_de_juego
+    
+    
+    def muestra_letras_erradas(self):
+        return self.letras_erradas
