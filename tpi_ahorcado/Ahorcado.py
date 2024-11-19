@@ -1,42 +1,46 @@
+import string
+
 class Ahorcado:
-    
-    # Definimos 6 vidas (cabeza, tronco, brazos (2) y piernas (2))
-    vidas = 6
 
     def __init__(self, palabra):
         self.palabra = palabra
+        self.vidas = 6 # Definimos 6 vidas (cabeza, tronco, brazos (2) y piernas (2))
         self.letras_adivinadas = []
         self.letras_erradas = []
         self.fin_de_juego = False
     
     def ingresar_letra(self, letra):
-        if letra in self.letras_adivinadas or letra in self.letras_erradas:
-            print('Ya has ingresado esa letra. Por favor ingresá otra.')
-        else:
-            if letra in self.palabra:
-                self.letras_adivinadas.append(letra)
-                self.muestra_palabra()
-                print('Acertaste. ¡Continúa así!')
-                return True
+        caracteres_especiales = string.punctuation
+        if not letra in caracteres_especiales or not letra.isdigit():
+            if letra in self.letras_adivinadas or letra in self.letras_erradas:
+                print('Ya has ingresado esa letra. Por favor ingresá otra.')
             else:
-                self.letras_erradas.append(letra)
-                print(f'Letras erradas: {self.letras_erradas}')
-                print(f'Perdiste una vida.')
-                Ahorcado.descuenta_vida()
-                print(f'Te quedan {Ahorcado.vidas} vidas')
-                return False
+                if letra in self.palabra:
+                    self.letras_adivinadas.append(letra)
+                    self.muestra_palabra()
+                    print('Acertaste. ¡Continúa así!')
+                    return True
+                else:
+                    self.letras_erradas.append(letra)
+                    print(f'Letras erradas: {self.letras_erradas}')
+                    print(f'Perdiste una vida.')
+                    self.descuenta_vida()
+                    print(f'Te quedan {self.vidas} vidas')
+                    return False
+        else:
+            return False
             
             
     def arriesgar_palabra(self, palabra_ingresada):
         if not self.palabra == palabra_ingresada:
-            Ahorcado.descuenta_vida()
+            self.descuenta_vida()
             return False
         return True
     
-    @staticmethod
-    def descuenta_vida():
-        Ahorcado.vidas -= 1
-        if Ahorcado.vidas > 0:
+    
+    def descuenta_vida(self):
+        self.vidas -= 1
+        if self.vidas > 0:
             return True
         else:
             return False

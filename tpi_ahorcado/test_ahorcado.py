@@ -12,7 +12,7 @@ class Test(unittest.TestCase):
 
     # Done
     def test_falla_letra(self):
-        palabra = 'prueba'
+        palabra = 'testea'
         ahorcado = Ahorcado(palabra)
         letra = 'g'
         self.assertEqual(ahorcado.ingresar_letra(letra), False)
@@ -21,24 +21,23 @@ class Test(unittest.TestCase):
     # Done
     def test_falla_letra_descuenta_vida(self):
         # Errar 1 sola vez
-        Ahorcado.vidas = 6
-        palabra = 'perro'
+        palabra = 'conejo'
         ahorcado = Ahorcado(palabra)
         letra = 'x'
         ahorcado.ingresar_letra(letra)    
-        self.assertEqual(Ahorcado.vidas, 5)
+        self.assertEqual(ahorcado.vidas, 5)
 
 
     # Done
     def test_fin_de_vidas(self):
         # Errar 6 veces
-        Ahorcado.vidas = 6
         palabra = 'perro'
         ahorcado = Ahorcado(palabra)
         letras = ['x','y','z','w','t','q']
         for letra in letras:
             ahorcado.ingresar_letra(letra)
-        self.assertEqual(Ahorcado.vidas, 0)
+        self.assertEqual(ahorcado.vidas, 0)
+        
         
     # Done
     def test_acierta_palabra_correcta(self):
@@ -64,6 +63,7 @@ class Test(unittest.TestCase):
             ahorcado.ingresar_letra(let)
         self.assertEqual(ahorcado.muestra_palabra(), 'Perro')
         
+        
     # Done
     def test_gana_juego(self):
         palabra_correcta = 'Perro'
@@ -75,12 +75,26 @@ class Test(unittest.TestCase):
     
     # Done
     def test_guarda_letras_erradas(self):
-        palabra_correcta = 'Pato'
+        palabra_correcta = 'pato'
         ahorcado = Ahorcado(palabra_correcta)
         letras = ['h','t','a','c','v']
         for let in letras:
             ahorcado.ingresar_letra(let)
         self.assertEqual(ahorcado.muestra_letras_erradas(),['h','c','v'])
+
+
+    # Done
+    def test_verifica_caracter_especial(self):
+        palabra = 'scrum'
+        ahorcado = Ahorcado(palabra)
+        self.assertEqual(ahorcado.ingresar_letra('?'), False)
+        
+        
+    # Done
+    def test_verifica_numero(self):
+         palabra = 'malardo'
+         ahorcado = Ahorcado(palabra)
+         self.assertEqual(ahorcado.ingresar_letra('5'), False)
     
 if __name__ ==  '__main__':
     unittest.main()  # run all tests

@@ -10,5 +10,3 @@ Reunión Andrés 29/10/2024
 # Si acierto, ver las letras y donde están acertadas
 
 # No permitir ingreso de una letra que ya se ingresó ni caracteres distintos de letras
-
-
