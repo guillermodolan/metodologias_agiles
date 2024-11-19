@@ -2,6 +2,7 @@ import unittest
 from tpi_ahorcado.Ahorcado import Ahorcado
 
 class Test(unittest.TestCase):
+    
     # Done
     def test_acierta_letra(self):
         palabra = 'prueba'
@@ -92,9 +93,25 @@ class Test(unittest.TestCase):
         
     # Done
     def test_verifica_numero(self):
-         palabra = 'malardo'
-         ahorcado = Ahorcado(palabra)
-         self.assertEqual(ahorcado.ingresar_letra('5'), False)
+        palabra = 'malardo'
+        ahorcado = Ahorcado(palabra)
+        self.assertEqual(ahorcado.ingresar_letra('5'), False)
+    
+    
+    # Done
+    def test_usa_comodin(self):
+        palabra = 'ayuda'
+        ahorcado = Ahorcado(palabra)
+        self.assertEqual(ahorcado.uso_comodin(), True)
+
+
+    # Done
+    def test_usa_dos_comodines(self):
+        palabra = 'help'
+        ahorcado = Ahorcado(palabra)
+        ahorcado.uso_comodin()
+        self.assertEqual(ahorcado.uso_comodin(), False)
+        
     
 if __name__ ==  '__main__':
     unittest.main()  # run all tests

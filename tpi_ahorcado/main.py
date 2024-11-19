@@ -5,7 +5,7 @@ ahorcado = Ahorcado(palabra_correcta)
 
 fin_juego = False
 
-while not fin_juego and Ahorcado.vidas > 0:
+while not fin_juego and ahorcado.vidas > 0:
     letra = input('Ingresá una letra: ')
     ahorcado.ingresar_letra(letra)
     print(ahorcado.muestra_palabra())

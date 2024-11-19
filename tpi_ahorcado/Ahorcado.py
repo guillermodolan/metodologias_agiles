@@ -1,4 +1,4 @@
-import string
+import string, random
 
 class Ahorcado:
 
@@ -7,12 +7,21 @@ class Ahorcado:
         self.vidas = 6 # Definimos 6 vidas (cabeza, tronco, brazos (2) y piernas (2))
         self.letras_adivinadas = []
         self.letras_erradas = []
+        self.comodin = 1
         self.fin_de_juego = False
+        
+        
+    def comprueba_letra_repetida(self, letra):
+        if letra in self.letras_adivinadas or letra in self.letras_erradas:
+            return True
+        else:
+            return False
+    
     
     def ingresar_letra(self, letra):
         caracteres_especiales = string.punctuation
         if not letra in caracteres_especiales or not letra.isdigit():
-            if letra in self.letras_adivinadas or letra in self.letras_erradas:
+            if self.comprueba_letra_repetida(letra):
                 print('Ya has ingresado esa letra. Por favor ingresá otra.')
             else:
                 if letra in self.palabra:
@@ -69,3 +78,16 @@ class Ahorcado:
     
     def muestra_letras_erradas(self):
         return self.letras_erradas
+    
+    
+    def uso_comodin(self):
+        if self.comodin == 1:
+            letra = random.choice(self.palabra)
+            while self.comprueba_letra_repetida(letra):
+                letra = random.choice(self.palabra)
+            self.ingresar_letra(letra)
+            self.comodin = 0
+            return True
+        else:
+            print("Ya usaste un comodin")
+            return False
