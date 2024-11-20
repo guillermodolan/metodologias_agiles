@@ -11,8 +11,6 @@ pool:
 
 strategy:
   matrix:
-    Python38:
-      python.version: '3.8'
     Python311:
       python.version: '3.11'
 
@@ -27,16 +25,34 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
-# Ejecutar Pylint para el análisis estático
+
 - script: |
     pip install pylint
-    pylint --exit-zero $(Build.SourcesDirectory)/tpi_ahorcado --output-format=parseable > pylint-report.txt
+    pylint --exit-zero $(Build.SourcesDirectory)/tpi_ahorcado --output-format=parseable > $(Build.SourcesDirectory)/pylint-report.txt
   displayName: 'Run Pylint Static Code Analysis'
 
 - script: |
     pip install pytest pytest-cov pytest-azurepipelines
     pytest --cov=. --cov-report xml
   displayName: 'Run tests with coverage'
+  
+  # Configurar git y subir el archivo a GitHub
+- script: |
+    # Configurar git
+    git config --global user.name "Guillermo"
+    git config --global user.email "guillermo230899@gmail.com"
+
+    git clone https://$(GITHUB_TOKEN)@github.com/guillermodolan/metologias_agiles.git $(Build.SourcesDirectory)/repo
+
+    mv $(Build.SourcesDirectory)/pylint-report.txt $(Build.SourcesDirectory)/repo/
+
+    cd $(Build.SourcesDirectory)/repo
+    git add pylint-report.txt
+    git commit -m "Add pylint report"
+    git push origin main
+  displayName: 'Push Pylint Report to GitHub'
+  env:
+    GITHUB_TOKEN: $(GITHUB_TOKEN)
 
 - task: PublishTestResults@2
   inputs:
