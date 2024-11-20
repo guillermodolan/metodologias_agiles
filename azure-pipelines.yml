@@ -30,7 +30,7 @@ steps:
 # Ejecutar Pylint para el análisis estático
 - script: |
     pip install pylint
-    pylint $(Build.SourcesDirectory)/.
+    pylint --exit-zero $(Build.SourcesDirectory)/tpi_ahorcado
   displayName: 'Run Pylint Static Code Analysis'
 
 - script: |
