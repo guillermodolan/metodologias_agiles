@@ -39,7 +39,7 @@ steps:
     pytest --cov=. --cov-report xml
   displayName: 'Run tests with coverage'
   
-  # Configurar git y subir el archivo a GitHub 
+  # Configurar git y subir el archivo a GitHub
 - script: |
     # Configurar git
     git config --global user.name "guillermodolan"
