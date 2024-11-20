@@ -42,7 +42,7 @@ steps:
     git config --global user.name "guillermodolan"
     git config --global user.email "guillermo230899@gmail.com"
 
-    git clone https://$(GITHUB_TOKEN)@github.com/guillermodolan/metologias_agiles.git $(Build.SourcesDirectory)/repo
+    git clone https://$(GITHUB_TOKEN)@github.com/guillermodolan/metodologias_agiles.git $(Build.SourcesDirectory)/repo
 
     mv $(Build.SourcesDirectory)/pylint-report.txt $(Build.SourcesDirectory)/repo/
 
