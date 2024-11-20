@@ -9,6 +9,9 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  - group: GITHUB_TOKEN
+
 strategy:
   matrix:
     Python311:
@@ -45,7 +48,6 @@ steps:
     git clone https://$(GITHUB_TOKEN)@github.com/guillermodolan/metodologias_agiles.git $(Build.SourcesDirectory)/repo
 
     mv $(Build.SourcesDirectory)/pylint-report.txt $(Build.SourcesDirectory)/repo/
-
     cd $(Build.SourcesDirectory)/repo
     git add pylint-report.txt
     git commit -m "Add pylint report"
