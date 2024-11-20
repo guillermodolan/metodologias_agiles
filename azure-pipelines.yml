@@ -30,7 +30,7 @@ steps:
 # Ejecutar Pylint para el análisis estático
 - script: |
     pip install pylint
-    pylint $(Build.SourcesDirectory)/my_python_project  # Asegúrate de que esta ruta sea la correcta
+    pylint $(Build.SourcesDirectory)/https://github.com/guillermodolan/metodologias_agiles
   displayName: 'Run Pylint Static Code Analysis'
 
 - script: |
