@@ -39,7 +39,7 @@ steps:
   # Configurar git y subir el archivo a GitHub
 - script: |
     # Configurar git
-    git config --global user.name "Guillermo"
+    git config --global user.name "guillermodolan"
     git config --global user.email "guillermo230899@gmail.com"
 
     git clone https://$(GITHUB_TOKEN)@github.com/guillermodolan/metologias_agiles.git $(Build.SourcesDirectory)/repo
