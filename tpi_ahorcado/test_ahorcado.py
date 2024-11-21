@@ -2,7 +2,6 @@ import unittest
 from tpi_ahorcado.Ahorcado import Ahorcado
 
 class Test(unittest.TestCase):
-    
     # Done
     def test_acierta_letra(self):
         palabra = 'prueba'
@@ -28,7 +27,6 @@ class Test(unittest.TestCase):
         ahorcado.ingresar_letra(letra)    
         self.assertEqual(ahorcado.vidas, 5)
 
-
     # Done
     def test_fin_de_vidas(self):
         # Errar 6 veces
@@ -39,7 +37,6 @@ class Test(unittest.TestCase):
             ahorcado.ingresar_letra(letra)
         self.assertEqual(ahorcado.vidas, 0)
         
-        
     # Done
     def test_acierta_palabra_correcta(self):
        palabra = 'destino'
@@ -47,14 +44,12 @@ class Test(unittest.TestCase):
        palabra_ingresada = 'destino'
        self.assertEqual(ahorcado.arriesgar_palabra(palabra_ingresada), True)
        
-       
    # Done
     def test_falla_palabra_correcta(self):
        palabra = 'destino'
        ahorcado = Ahorcado(palabra)
        palabra_ingresada = 'ficticio'
        self.assertEqual(ahorcado.arriesgar_palabra(palabra_ingresada), False)
-       
        
     # Done
     def test_muestra_palabra(self):
@@ -64,7 +59,6 @@ class Test(unittest.TestCase):
             ahorcado.ingresar_letra(let)
         self.assertEqual(ahorcado.muestra_palabra(), 'Perro')
         
-        
     # Done
     def test_gana_juego(self):
         palabra_correcta = 'Perro'
@@ -72,7 +66,6 @@ class Test(unittest.TestCase):
         for let in palabra_correcta:
             ahorcado.ingresar_letra(let)
         self.assertEqual(ahorcado.comprueba_fin_de_juego(), True)
-        
     
     # Done
     def test_guarda_letras_erradas(self):
@@ -83,13 +76,11 @@ class Test(unittest.TestCase):
             ahorcado.ingresar_letra(let)
         self.assertEqual(ahorcado.muestra_letras_erradas(),['h','c','v'])
 
-
     # Done
     def test_verifica_caracter_especial(self):
         palabra = 'scrum'
         ahorcado = Ahorcado(palabra)
         self.assertEqual(ahorcado.ingresar_letra('?'), False)
-        
         
     # Done
     def test_verifica_numero(self):
@@ -97,13 +88,11 @@ class Test(unittest.TestCase):
         ahorcado = Ahorcado(palabra)
         self.assertEqual(ahorcado.ingresar_letra('5'), False)
     
-    
     # Done
     def test_usa_comodin(self):
         palabra = 'ayuda'
         ahorcado = Ahorcado(palabra)
         self.assertEqual(ahorcado.uso_comodin(), True)
-
 
     # Done
     def test_usa_dos_comodines(self):
