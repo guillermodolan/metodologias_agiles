@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from Ahorcado import Ahorcado
+from tpi_ahorcado.Ahorcado import Ahorcado
 
 app = Flask(__name__)
 
@@ -55,5 +55,5 @@ def usar_comodin():
         'vidas': juego.vidas
     })
 
-# if __name__ == '__main__':
-#    app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
