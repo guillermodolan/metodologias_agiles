@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego del Ahorcado</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Juego del Ahorcado</h1>
+    <p>Palabra: <span id="palabra"></span></p>
+    <p>Vidas restantes: <span id="vidas"></span></p>
+    <p>Letras erradas: <span id="erradas"></span></p>
+
+    <form id="letra-form">
+        <label for="letra">Ingresa una letra:</label>
+        <input type="text" id="letra" name="letra" maxlength="1" required>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <form id="palabra-form">
+        <label for="palabra">Arriesgar palabra:</label>
+        <input type="text" id="palabra" name="palabra" required>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <button id="reiniciar">Reiniciar Juego</button>
+
+    <script>
+        function actualizarInterfaz(data) {
+            $("#palabra").text(data.palabra);
+            $("#vidas").text(data.vidas);
+            $("#erradas").text(data.erradas.join(", "));
+            document.getElementById("letra").value = "";
+            document.getElementById("palabra").value = "";
+            if (data.fin_juego) {
+                alert(data.vidas > 0 ? "¡Ganaste!" : "Perdiste.");
+            }
+        }
+
+        $(document).ready(function() {
+            $("#letra-form").submit(function(e) {
+                e.preventDefault();
+                $.post("/ingresar_letra", { letra: $("#letra").val() }, function(data) {
+                    actualizarInterfaz(data);
+                });
+            });
+
+            $("#palabra-form").submit(function(e) {
+                e.preventDefault();
+                $.post("/arriesgar_palabra", { palabra: $("#palabra").val() }, function(data) {
+                    if (data.fin_juego) alert(data.resultado ? "¡Ganaste!" : "Fallaste.");
+                    actualizarInterfaz(data);
+                });
+            });
+
+            $("#reiniciar").click(function() {
+                $.post("/reiniciar", function(data) {
+                    alert(data.message);
+                    location.reload();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
