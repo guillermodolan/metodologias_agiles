@@ -1,7 +1,9 @@
+************* Module tpi_ahorcado
+tpi_ahorcado/__init__.py:1: [C0304(missing-final-newline), ] Final newline missing
 ************* Module tpi_ahorcado.main
 tpi_ahorcado/main.py:17: [C0304(missing-final-newline), ] Final newline missing
 tpi_ahorcado/main.py:1: [C0114(missing-module-docstring), ] Missing module docstring
-tpi_ahorcado/main.py:1: [E0401(import-error), ] Unable to import 'Ahorcado'
+tpi_ahorcado/main.py:14: [E1101(no-member), ] Class 'Ahorcado' has no 'vidas' member
 ************* Module tpi_ahorcado.test_ahorcado
 tpi_ahorcado/test_ahorcado.py:27: [C0303(trailing-whitespace), ] Trailing whitespace
 tpi_ahorcado/test_ahorcado.py:39: [C0303(trailing-whitespace), ] Trailing whitespace
@@ -37,45 +39,7 @@ tpi_ahorcado/test_ahorcado.py:80: [C0116(missing-function-docstring), Test.test_
 tpi_ahorcado/test_ahorcado.py:86: [C0116(missing-function-docstring), Test.test_verifica_numero] Missing function or method docstring
 tpi_ahorcado/test_ahorcado.py:92: [C0116(missing-function-docstring), Test.test_usa_comodin] Missing function or method docstring
 tpi_ahorcado/test_ahorcado.py:98: [C0116(missing-function-docstring), Test.test_usa_dos_comodines] Missing function or method docstring
-************* Module tpi_ahorcado.Ahorcado
-tpi_ahorcado/Ahorcado.py:12: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/Ahorcado.py:13: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/Ahorcado.py:19: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/Ahorcado.py:20: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/Ahorcado.py:41: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/Ahorcado.py:42: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/Ahorcado.py:48: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/Ahorcado.py:49: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/Ahorcado.py:57: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/Ahorcado.py:71: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/Ahorcado.py:72: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/Ahorcado.py:77: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/Ahorcado.py:78: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/Ahorcado.py:81: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/Ahorcado.py:82: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/Ahorcado.py:93: [C0304(missing-final-newline), ] Final newline missing
-tpi_ahorcado/Ahorcado.py:1: [C0114(missing-module-docstring), ] Missing module docstring
-tpi_ahorcado/Ahorcado.py:1: [C0103(invalid-name), ] Module name "Ahorcado" doesn't conform to snake_case naming style
-tpi_ahorcado/Ahorcado.py:1: [C0410(multiple-imports), ] Multiple imports on one line (string, random)
-tpi_ahorcado/Ahorcado.py:3: [C0115(missing-class-docstring), Ahorcado] Missing class docstring
-tpi_ahorcado/Ahorcado.py:14: [C0116(missing-function-docstring), Ahorcado.comprueba_letra_repetida] Missing function or method docstring
-tpi_ahorcado/Ahorcado.py:15: [R1703(simplifiable-if-statement), Ahorcado.comprueba_letra_repetida] The if statement can be replaced with 'return bool(test)'
-tpi_ahorcado/Ahorcado.py:15: [R1705(no-else-return), Ahorcado.comprueba_letra_repetida] Unnecessary "else" after "return", remove the "else" and de-indent the code inside it
-tpi_ahorcado/Ahorcado.py:21: [C0116(missing-function-docstring), Ahorcado.ingresar_letra] Missing function or method docstring
-tpi_ahorcado/Ahorcado.py:27: [R1705(no-else-return), Ahorcado.ingresar_letra] Unnecessary "else" after "return", remove the "else" and de-indent the code inside it
-tpi_ahorcado/Ahorcado.py:35: [W1309(f-string-without-interpolation), Ahorcado.ingresar_letra] Using an f-string that does not have any interpolated variables
-tpi_ahorcado/Ahorcado.py:21: [R1710(inconsistent-return-statements), Ahorcado.ingresar_letra] Either all return statements in a function should return an expression, or none of them should.
-tpi_ahorcado/Ahorcado.py:43: [C0116(missing-function-docstring), Ahorcado.arriesgar_palabra] Missing function or method docstring
-tpi_ahorcado/Ahorcado.py:50: [C0116(missing-function-docstring), Ahorcado.descuenta_vida] Missing function or method docstring
-tpi_ahorcado/Ahorcado.py:52: [R1703(simplifiable-if-statement), Ahorcado.descuenta_vida] The if statement can be replaced with 'return bool(test)'
-tpi_ahorcado/Ahorcado.py:52: [R1705(no-else-return), Ahorcado.descuenta_vida] Unnecessary "else" after "return", remove the "else" and de-indent the code inside it
-tpi_ahorcado/Ahorcado.py:59: [C0116(missing-function-docstring), Ahorcado.adivina_palabra] Missing function or method docstring
-tpi_ahorcado/Ahorcado.py:63: [C0116(missing-function-docstring), Ahorcado.muestra_palabra] Missing function or method docstring
-tpi_ahorcado/Ahorcado.py:73: [C0116(missing-function-docstring), Ahorcado.comprueba_fin_de_juego] Missing function or method docstring
-tpi_ahorcado/Ahorcado.py:79: [C0116(missing-function-docstring), Ahorcado.muestra_letras_erradas] Missing function or method docstring
-tpi_ahorcado/Ahorcado.py:83: [C0116(missing-function-docstring), Ahorcado.uso_comodin] Missing function or method docstring
-tpi_ahorcado/Ahorcado.py:84: [R1705(no-else-return), Ahorcado.uso_comodin] Unnecessary "else" after "return", remove the "else" and de-indent the code inside it
 
 -----------------------------------
-Your code has been rated at 4.87/10
+Your code has been rated at 5.17/10
 
