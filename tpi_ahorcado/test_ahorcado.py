@@ -42,7 +42,8 @@ class Test(unittest.TestCase):
        palabra = 'destino'
        ahorcado = Ahorcado(palabra)
        palabra_ingresada = 'destino'
-       self.assertEqual(ahorcado.arriesgar_palabra(palabra_ingresada), True)
+       ahorcado.arriesgar_palabra(palabra_ingresada)
+       self.assertEqual(ahorcado.muestra_palabra(), 'destino')
        
    # Done
     def test_falla_palabra_correcta(self):

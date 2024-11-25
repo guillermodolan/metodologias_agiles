@@ -24,7 +24,7 @@ def ingresar_letra():
 
 @app.route('/arriesgar_palabra', methods=['POST'])
 def arriesgar_palabra():
-    palabra_ingresada = request.form['palabra']
+    palabra_ingresada = request.form['palabra_arriesga']
     print(f'Palabra ingresada: {palabra_ingresada}')
     resultado = juego_actual.arriesgar_palabra(palabra_ingresada)
     fin_juego = juego_actual.comprueba_fin_de_juego()

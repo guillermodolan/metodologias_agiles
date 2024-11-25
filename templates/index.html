@@ -18,9 +18,9 @@
         <button type="submit">Enviar</button>
     </form>
 
-    <form id="palabra-form">
-        <label for="palabra">Arriesgar palabra:</label>
-        <input type="text" id="palabra" name="palabra" required>
+    <form id="palabra-form" method="post">
+        <label for="palabra_arriesga">Arriesgar palabra:</label>
+        <input type="text" id="palabra_arriesga" name="palabra_arriesga" required>
         <button type="submit">Enviar</button>
     </form>
 
@@ -32,7 +32,7 @@
             $("#vidas").text(data.vidas);
             $("#erradas").text(data.erradas.join(", "));
             document.getElementById("letra").value = "";
-            document.getElementById("palabra").value = "";
+            document.getElementById("palabra_arriesga").value = "";
             if (data.fin_juego) {
                 alert(data.vidas > 0 ? "¡Ganaste!" : "Perdiste.");
             }
@@ -48,7 +48,7 @@
 
             $("#palabra-form").submit(function(e) {
                 e.preventDefault();
-                $.post("/arriesgar_palabra", { palabra: $("#palabra").val() }, function(data) {
+                $.post("/arriesgar_palabra", { palabra_arriesga: $("#palabra_arriesga").val() }, function(data) {
                     if (data.fin_juego) alert(data.resultado ? "¡Ganaste!" : "Fallaste.");
                     actualizarInterfaz(data);
                 });

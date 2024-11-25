@@ -44,7 +44,9 @@ class Ahorcado:
         if not self.palabra == palabra_ingresada:
             self.descuenta_vida()
             return False
-        return True
+        else:
+            for let in self.palabra: self.letras_adivinadas.append(let)
+            return True
     
     
     def descuenta_vida(self):
