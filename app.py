@@ -9,6 +9,13 @@ juego_actual = Ahorcado("python")
 def index():
     return render_template('index.html', vidas=juego_actual.vidas, palabra=juego_actual.muestra_palabra(), erradas=juego_actual.muestra_letras_erradas())
 
+@app.route('/configurar_palabra', methods=['POST'])
+def configurar_palabra():
+    global juego_actual
+    palabra = request.form['palabra']
+    juego_actual = Ahorcado(palabra)
+    return jsonify({"message": "Palabra configurada correctamente."})
+
 @app.route('/ingresar_letra', methods=['POST'])
 def ingresar_letra():
     letra = request.form['letra']

@@ -7,60 +7,92 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <h1>Juego del Ahorcado</h1>
-    <p>Palabra: <span id="palabra"></span></p>
-    <p>Vidas restantes: <span id="vidas"></span></p>
-    <p>Letras erradas: <span id="erradas"></span></p>
 
-    <form id="letra-form">
-        <label for="letra">Ingresa una letra:</label>
-        <input type="text" id="letra" name="letra" maxlength="1" required>
-        <button type="submit">Enviar</button>
-    </form>
+    <div id="configurar-palabra">
+        <form id="configurar-form">
+            <label for="palabra">Ingresa una palabra secreta:</label>
+            <input type="text" id="palabra" name="palabra" required>
+            <button type="submit">Configurar Palabra</button>
+        </form>
+    </div>
 
-    <form id="palabra-form" method="post">
-        <label for="palabra_arriesga">Arriesgar palabra:</label>
-        <input type="text" id="palabra_arriesga" name="palabra_arriesga" required>
-        <button type="submit">Enviar</button>
-    </form>
+    <div id="juego" style="display: none;">
+        <h1>Juego del Ahorcado</h1>
+        <p>Palabra: <span id="palabra_box"></span></p>
+        <p>Vidas restantes: <span id="vidas"></span></p>
+        <p>Letras erradas: <span id="erradas"></span></p>
 
-    <button id="reiniciar">Reiniciar Juego</button>
+        <form id="letra-form">
+            <label for="letra">Ingresa una letra:</label>
+            <input type="text" id="letra" name="letra" maxlength="1" required>
+            <button type="submit">Enviar</button>
+        </form>
 
-    <script>
-        function actualizarInterfaz(data) {
-            $("#palabra").text(data.palabra);
-            $("#vidas").text(data.vidas);
-            $("#erradas").text(data.erradas.join(", "));
-            document.getElementById("letra").value = "";
-            document.getElementById("palabra_arriesga").value = "";
-            if (data.fin_juego) {
-                alert(data.vidas > 0 ? "¡Ganaste!" : "Perdiste.");
+        <form id="palabra-form" method="post">
+            <label for="palabra_arriesga">Arriesgar palabra:</label>
+            <input type="text" id="palabra_arriesga" name="palabra_arriesga" required>
+            <button type="submit">Enviar</button>
+        </form>
+
+        <button id="reiniciar">Reiniciar Juego</button>
+
+        <script>
+            function actualizarInterfaz(data) {
+                $("#palabra_box").text(data.palabra);
+                console.log("Contenido de palabra: ", data.palabra);
+                $("#vidas").text(data.vidas);
+                $("#erradas").text(data.erradas.join(", "));
+                document.getElementById("letra").value = "";
+                document.getElementById("palabra_arriesga").value = "";
+                if (data.fin_juego) {
+                    if (data.vidas > 0) {
+                        alert("¡Ganaste!");
+                        reiniciarJuego();
+                    } else {
+                        alert("¡Perdiste!");
+                        reiniciarJuego();
+                    }
+                }
             }
-        }
 
-        $(document).ready(function() {
-            $("#letra-form").submit(function(e) {
-                e.preventDefault();
-                $.post("/ingresar_letra", { letra: $("#letra").val() }, function(data) {
-                    actualizarInterfaz(data);
-                });
-            });
-
-            $("#palabra-form").submit(function(e) {
-                e.preventDefault();
-                $.post("/arriesgar_palabra", { palabra_arriesga: $("#palabra_arriesga").val() }, function(data) {
-                    if (data.fin_juego) alert(data.resultado ? "¡Ganaste!" : "Fallaste.");
-                    actualizarInterfaz(data);
-                });
-            });
-
-            $("#reiniciar").click(function() {
+            function reiniciarJuego() {
                 $.post("/reiniciar", function(data) {
-                    alert(data.message);
-                    location.reload();
+                alert(data.message);
+                location.reload();
                 });
+            }
+
+            $(document).ready(function() {
+                $("#letra-form").submit(function(e) {
+                    e.preventDefault();
+                    $.post("/ingresar_letra", { letra: $("#letra").val() }, function(data) {
+                        actualizarInterfaz(data);
+                    });
+                });
+
+                $("#palabra-form").submit(function(e) {
+                    e.preventDefault();
+                    $.post("/arriesgar_palabra", { palabra_arriesga: $("#palabra_arriesga").val() }, function(data) {
+                        if (data.fin_juego) alert(data.resultado ? "¡Ganaste!" : "Fallaste.");
+                        actualizarInterfaz(data);
+                    });
+                });
+
+                // Configurar palabra secreta
+                $("#configurar-form").submit(function(e) {
+                    e.preventDefault();
+                    $.post("/configurar_palabra", { palabra: $("#palabra").val() }, function(data) {
+                    alert(data.message);
+                    $("#configurar-palabra").hide();
+                    $("#juego").show();
+                    });
+                });
+
+                $("#reiniciar").click(reiniciarJuego);
             });
-        });
-    </script>
+        </script>
+    </div>
+
+
 </body>
 </html>

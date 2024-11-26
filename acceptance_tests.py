@@ -1,48 +1,85 @@
+import unittest
 from selenium import webdriver
-from selenium.webdriver.ie.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.ie.service import Service
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-import unittest
+import time
 
-class AcceptanceTests(unittest.TestCase):
+class TestAhorcadoAcceptance(unittest.TestCase):
+
     def setUp(self):
-        self.driver_path = 'D:\\metodologias_agiles\\chromedriver.exe'  # Asegúrate de que esta ruta sea correcta
-        self.service = Service(self.driver_path)
-        self.options = webdriver.ChromeOptions()
-        self.driver = webdriver.Chrome(service=self.service, options=self.options)
-        self.driver.get("http://127.0.0.1:5000/")
-
-    def test_ingresar_letra_correcta(self):
-        driver = self.driver
-        letra_input = driver.find_element(By.ID, "letra")  # Campo de entrada para la letra
-        letra_input.send_keys("p")
-        letra_input.send_keys(Keys.RETURN)
+        # Inicializa el navegador (en este caso Chrome)
+        driver_path = 'C:\\metodologias_agiles\\chromedriver.exe'
+        service = Service(driver_path)
+        options = webdriver.ChromeOptions()
+        options.add_argument('--start-maximized')
+        self.driver = webdriver.Chrome(service=service, options=options)
+        self.driver.get("http://localhost:5000")
         
-        # Espera hasta que el elemento con ID "palabra" contenga la letra "p"
-        WebDriverWait(driver, 3).until(
-            EC.text_to_be_present_in_element((By.ID, "palabra"), "p")
-        )
-        palabra = driver.find_element(By.ID, "palabra").text
-        self.assertIn("p", palabra)
-
-    def test_arriesgar_palabra_correcta(self):
+    def test_configura_palabra(self):
         driver = self.driver
-        # Cambiar este ID si el campo de entrada de la palabra es distinto
-        palabra_input = driver.find_element(By.ID, "letra")
+        # Configurar la palabra secreta
+        # palabra_input = driver.find_element(By.NAME, 'palabra_input')
+        palabra_input = WebDriverWait(driver, 5).until(EC.presence_of_element_located(By.XPATH, '/html/body/div[1]/form/input'))
         palabra_input.send_keys("python")
-        palabra_input.send_keys(Keys.RETURN)
+        self.assertEqual(palabra_input.get_attribute('value'), "python")
 
-        # Espera explícita hasta que la alerta esté presente
-        WebDriverWait(driver, 3).until(EC.alert_is_present())
+    def test_juego_del_ahorcado(self):
+        driver = self.driver
+        # Verificar que la palabra está oculta y las vidas son correctas
+        palabra_box = WebDriverWait(driver, 10).until(EC.presence_of_element_located( (By.ID, 'palabra_box') ))
+        # palabra_box = driver.find_element(By.ID, "palabra_box")
+        self.assertNotEqual(palabra_box.text, "python")  # Debería mostrar guiones
+        vidas = driver.find_element(By.ID, "vidas")
+        self.assertEqual(vidas.text, "6")  # El número de vidas inicial
 
-        alert = driver.switch_to.alert
-        self.assertEqual(alert.text, "¡Ganaste!")
-        alert.accept()
+        # Ingresar una letra correcta
+        letra_input = driver.find_element(By.ID, "letra")
+        letra_input.send_keys("p")
+        enviar_button = driver.find_element(By.XPATH, "//button[text()='Enviar']")
+        enviar_button.click()
+
+        # Esperar a que se actualice la interfaz
+        time.sleep(2)
+
+        # Verificar que la letra se ha acertado
+        palabra_box = driver.find_element(By.ID, "palabra_box")
+        self.assertIn("p", palabra_box.text)
+
+        # Ingresar una letra incorrecta
+        letra_input = driver.find_element(By.ID, "letra")
+        letra_input.send_keys("z")
+        enviar_button.click()
+
+        # Esperar a que se actualice la interfaz
+        time.sleep(2)
+
+        # Verificar que las letras erradas se muestran y las vidas se actualizan
+        erradas = driver.find_element(By.ID, "erradas")
+        self.assertIn("z", erradas.text)
+        vidas = driver.find_element(By.ID, "vidas")
+        self.assertEqual(vidas.text, "5")  # Después de un error, debería haber 5 vidas restantes
+
+        # Arriesgar una palabra incorrecta
+        palabra_arriesga_input = driver.find_element(By.ID, "palabra_arriesga")
+        palabra_arriesga_input.send_keys("java")
+        arriesgar_button = driver.find_element(By.XPATH, "//button[text()='Enviar']")
+        arriesgar_button.click()
+
+        # Esperar a que se actualice la interfaz
+        time.sleep(2)
+
+        # Verificar si el juego terminó con la respuesta incorrecta
+        alert_text = driver.switch_to.alert.text
+        self.assertEqual(alert_text, "Fallaste.")  # Dependiendo de si acertó o no
+
+        # Verificar el fin del juego
+        driver.switch_to.alert.accept()  # Aceptar la alerta
 
     def tearDown(self):
+        # Cerrar el navegador
         self.driver.quit()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()
