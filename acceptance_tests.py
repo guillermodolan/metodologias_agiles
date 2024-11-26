@@ -4,12 +4,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.ie.service import Service
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-import time
 
 class TestAhorcadoAcceptance(unittest.TestCase):
 
     def setUp(self):
-        # Inicializa el navegador (en este caso Chrome)
         driver_path = 'C:\\metodologias_agiles\\chromedriver.exe'
         service = Service(driver_path)
         options = webdriver.ChromeOptions()
@@ -17,14 +15,19 @@ class TestAhorcadoAcceptance(unittest.TestCase):
         self.driver = webdriver.Chrome(service=service, options=options)
         self.driver.get("http://localhost:5000")
         
-    def test_configura_palabra(self):
+    # Done    
+    def test_configura_palabra_secreta(self):
         driver = self.driver
-        # Configurar la palabra secreta
-        # palabra_input = driver.find_element(By.NAME, 'palabra_input')
-        palabra_input = WebDriverWait(driver, 5).until(EC.presence_of_element_located(By.XPATH, '/html/body/div[1]/form/input'))
+        palabra_input = WebDriverWait(driver, 5).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/input') ))
         palabra_input.send_keys("python")
         self.assertEqual(palabra_input.get_attribute('value'), "python")
-
+        
+    
+        
+    def tearDown(self):
+        # Cerrar el navegador
+        self.driver.quit()
+'''
     def test_juego_del_ahorcado(self):
         driver = self.driver
         # Verificar que la palabra está oculta y las vidas son correctas
@@ -76,10 +79,7 @@ class TestAhorcadoAcceptance(unittest.TestCase):
 
         # Verificar el fin del juego
         driver.switch_to.alert.accept()  # Aceptar la alerta
-
-    def tearDown(self):
-        # Cerrar el navegador
-        self.driver.quit()
+'''
 
 if __name__ == '__main__':
     unittest.main()

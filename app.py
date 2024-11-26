@@ -13,6 +13,7 @@ def index():
 def configurar_palabra():
     global juego_actual
     palabra = request.form['palabra']
+    print(f'Contenido de palabra: {palabra}')
     juego_actual = Ahorcado(palabra)
     return jsonify({"message": "Palabra configurada correctamente."})
 

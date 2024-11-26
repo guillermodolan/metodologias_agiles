@@ -13,6 +13,7 @@
             <label for="palabra">Ingresa una palabra secreta:</label>
             <input type="text" id="palabra" name="palabra" required>
             <button type="submit">Configurar Palabra</button>
+            <p id="error-msg" style="color: red; display: none;">La palabra solo puede contener letras. No se permiten números ni caracteres especiales.</p>
         </form>
     </div>
 
@@ -37,6 +38,18 @@
         <button id="reiniciar">Reiniciar Juego</button>
 
         <script>
+            document.getElementById('configurar-form').addEventListener('submit', function(event) {
+                const palabra = document.getElementById('palabra').value;
+                const regex = /^[A-Za-z]+$/;  // Asegura que solo contenga letras
+                if (!regex.test(palabra)) {
+                    document.getElementById('error-msg').style.display = 'block';  // Muestra el mensaje de error
+                    event.preventDefault();  // Previene el envío del formulario
+                }
+                else{
+                    document.getElementById('error-msg').style.display = 'none';  // Oculta el mensaje de error
+                }
+            });
+
             function actualizarInterfaz(data) {
                 $("#palabra_box").text(data.palabra);
                 console.log("Contenido de palabra: ", data.palabra);
@@ -81,11 +94,17 @@
                 // Configurar palabra secreta
                 $("#configurar-form").submit(function(e) {
                     e.preventDefault();
-                    $.post("/configurar_palabra", { palabra: $("#palabra").val() }, function(data) {
-                    alert(data.message);
-                    $("#configurar-palabra").hide();
-                    $("#juego").show();
-                    });
+                    const palabra = $("#palabra").val();
+                    const regex = /^[A-Za-z]+$/;
+                    if (regex.test(palabra)) {
+                        $.post("/configurar_palabra", { palabra: palabra }, function(data) {
+                            alert(data.message);
+                            $("#configurar-palabra").hide();
+                            $("#juego").show();
+                        });
+                    } else {
+                        alert('La palabra solo puede contener letras. No se permiten números ni caracteres especiales.');
+                    }
                 });
 
                 $("#reiniciar").click(reiniciarJuego);
