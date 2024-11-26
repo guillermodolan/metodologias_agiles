@@ -13,34 +13,72 @@ def index():
 def configurar_palabra():
     global juego_actual
     palabra = request.form['palabra']
-    print(f'Contenido de palabra: {palabra}')
     juego_actual = Ahorcado(palabra)
-    return jsonify({"message": "Palabra configurada correctamente."})
+
+    return jsonify({
+        "message": "Nueva palabra configurada. ¡Comienza el juego!",
+        "palabra": juego_actual.muestra_palabra(),  # Mostrar los '____'
+        "vidas": juego_actual.vidas,
+        "erradas": []
+    })
 
 @app.route('/ingresar_letra', methods=['POST'])
 def ingresar_letra():
-    letra = request.form['letra']
+    global juego_actual
+    letra = request.form['letra'].lower()
     resultado = juego_actual.ingresar_letra(letra)
     fin_juego = juego_actual.comprueba_fin_de_juego()
+
+    if fin_juego:
+        juego_actual = None
+        return jsonify({
+            "acierto": resultado,
+            "fin_juego": fin_juego,
+            "reiniciar": True
+        })
+    
     return jsonify({
         "acierto": resultado,
         "vidas": juego_actual.vidas,
         "palabra": juego_actual.muestra_palabra(),
         "erradas": juego_actual.muestra_letras_erradas(),
-        "fin_juego": fin_juego
+        "fin_juego": fin_juego,
+        "reiniciar": False
     })
 
 @app.route('/arriesgar_palabra', methods=['POST'])
 def arriesgar_palabra():
+    global juego_actual
     palabra_ingresada = request.form['palabra_arriesga']
-    print(f'Palabra ingresada: {palabra_ingresada}')
     resultado = juego_actual.arriesgar_palabra(palabra_ingresada)
     fin_juego = juego_actual.comprueba_fin_de_juego()
+
+    if fin_juego:
+        juego_actual = None
+        return jsonify({
+            "resultado": resultado,
+            "fin_juego": fin_juego,
+            "reiniciar": True
+        })
+
     return jsonify({
         "resultado": resultado,
         "vidas": juego_actual.vidas,
-        "fin_juego": fin_juego
+        "fin_juego": fin_juego,
+        "reiniciar": False
     })
+
+@app.route('/usar_comodin', methods=['POST'])
+def usar_comodin():
+    letra_comodin = juego_actual.uso_comodin()
+    return jsonify({
+        "letra_comodin": letra_comodin,
+        "vidas": juego_actual.vidas,
+        "palabra": juego_actual.muestra_palabra(),
+        "erradas": juego_actual.muestra_letras_erradas(),
+        "fin_juego": juego_actual.comprueba_fin_de_juego()
+    })
+
 
 @app.route('/reiniciar', methods=['POST'])
 def reiniciar():

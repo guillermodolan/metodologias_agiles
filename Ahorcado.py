@@ -24,8 +24,8 @@ class Ahorcado:
             if self.comprueba_letra_repetida(letra):
                 print('Ya has ingresado esa letra. Por favor ingresá otra.')
             else:
-                if letra in self.palabra:
-                    self.letras_adivinadas.append(letra)
+                if letra.lower() in self.palabra.lower():
+                    self.letras_adivinadas.append(letra.lower())
                     self.muestra_palabra()
                     print('Acertaste. ¡Continúa así!')
                     return True
@@ -41,11 +41,12 @@ class Ahorcado:
             
             
     def arriesgar_palabra(self, palabra_ingresada):
-        if not self.palabra == palabra_ingresada:
+        if self.palabra.lower() != palabra_ingresada.lower(): # Acá ignoro mayúsculas y minúsculas
             self.descuenta_vida()
             return False
         else:
-            for let in self.palabra: self.letras_adivinadas.append(let)
+            self.letras_adivinadas = list(self.palabra)
+            self.fin_de_juego = True
             return True
     
     
@@ -84,12 +85,8 @@ class Ahorcado:
     
     def uso_comodin(self):
         if self.comodin == 1:
-            letra = random.choice(self.palabra)
-            while self.comprueba_letra_repetida(letra):
-                letra = random.choice(self.palabra)
+            letra = random.choice([l for l in self.palabra if l not in self.letras_adivinadas])
             self.ingresar_letra(letra)
             self.comodin = 0
-            return True
-        else:
-            print("Ya usaste un comodin")
-            return False
+            return letra
+        return None

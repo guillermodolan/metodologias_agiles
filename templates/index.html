@@ -35,6 +35,8 @@
             <button type="submit">Enviar</button>
         </form>
 
+        <button id="usar-comodin">Usar Comodín</button>
+
         <button id="reiniciar">Reiniciar Juego</button>
 
         <script>
@@ -46,15 +48,24 @@
                     event.preventDefault();  // Previene el envío del formulario
                 }
                 else{
-                    document.getElementById('error-msg').style.display = 'none';  // Oculta el mensaje de error
+                    document.getElementById('error-msg').style.display = 'none';  // Oculto el mensaje de error
                 }
             });
 
             function actualizarInterfaz(data) {
-                $("#palabra_box").text(data.palabra);
-                console.log("Contenido de palabra: ", data.palabra);
-                $("#vidas").text(data.vidas);
-                $("#erradas").text(data.erradas.join(", "));
+                if(data.reiniciar){
+                    alert("El juego ha terminado. Configura una nueva palabra para jugar.");
+                    $("#configurar-palabra").show();
+                    $("#juego").hide();
+
+                    $("#palabra_box").text("");
+                    $("#vidas").text(""); // Limpio todo
+                    $("#erradas").text("")
+                    return;
+                }
+                $("#palabra_box").text(data.palabra || "");
+                $("#vidas").text(data.vidas || "");
+                $("#erradas").text((data.erradas || "").join(", "));
                 document.getElementById("letra").value = "";
                 document.getElementById("palabra_arriesga").value = "";
                 if (data.fin_juego) {
@@ -78,17 +89,27 @@
             $(document).ready(function() {
                 $("#letra-form").submit(function(e) {
                     e.preventDefault();
-                    $.post("/ingresar_letra", { letra: $("#letra").val() }, function(data) {
-                        actualizarInterfaz(data);
-                    });
+                    const letra = $("#letra").val();
+                    if (/^[a-zA-Z]$/.test(letra)) {
+                        $.post("/ingresar_letra", { letra: letra }, function (data) {
+                            actualizarInterfaz(data);
+                        });
+                    } else {
+                        alert("Por favor, ingresa una letra válida.");
+                    }
                 });
 
                 $("#palabra-form").submit(function(e) {
                     e.preventDefault();
-                    $.post("/arriesgar_palabra", { palabra_arriesga: $("#palabra_arriesga").val() }, function(data) {
-                        if (data.fin_juego) alert(data.resultado ? "¡Ganaste!" : "Fallaste.");
-                        actualizarInterfaz(data);
-                    });
+                    const palabra = $("#palabra_arriesga").val();
+                    if (/^[a-zA-Z]+$/.test(palabra)) {
+                        $.post("/arriesgar_palabra", { palabra_arriesga: $("#palabra_arriesga").val() }, function(data) {
+                            if (data.fin_juego) alert(data.resultado ? "¡Ganaste!" : "Fallaste.");
+                            actualizarInterfaz(data);
+                        });
+                    } else {
+                        alert("Por favor, ingresa una palabra válida")
+                    }
                 });
 
                 // Configurar palabra secreta
@@ -101,10 +122,24 @@
                             alert(data.message);
                             $("#configurar-palabra").hide();
                             $("#juego").show();
+                            $("#palabra_box").text(data.palabra);
+                            $("#vidas").text(data.vidas);
+                            $("#erradas").text("");
                         });
                     } else {
                         alert('La palabra solo puede contener letras. No se permiten números ni caracteres especiales.');
                     }
+                });
+
+                $("#usar-comodin").click(function () {
+                    $.post("/usar_comodin", function (data) {
+                        if (data.letra_comodin) {
+                            alert(`Comodín utilizado: ${data.letra_comodin}`);
+                            actualizarInterfaz(data);
+                        } else {
+                            alert("No tienes comodines disponibles.");
+                        }
+                    });
                 });
 
                 $("#reiniciar").click(reiniciarJuego);

@@ -15,7 +15,7 @@ class TestAhorcadoAcceptance(unittest.TestCase):
         self.driver = webdriver.Chrome(service=service, options=options)
         self.driver.get("http://localhost:5000")
         
-    # Done    
+    # Done    QUE GRANDE PAPAAAA
     def test_configura_palabra_secreta(self):
         driver = self.driver
         palabra_input = WebDriverWait(driver, 5).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/input') ))
