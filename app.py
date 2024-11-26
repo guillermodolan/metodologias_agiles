@@ -53,16 +53,20 @@ def arriesgar_palabra():
     resultado = juego_actual.arriesgar_palabra(palabra_ingresada)
     fin_juego = juego_actual.comprueba_fin_de_juego()
 
+    palabra_mostrada = juego_actual.muestra_palabra()
+
     if fin_juego:
         juego_actual = None
         return jsonify({
             "resultado": resultado,
+            "palabra": palabra_mostrada,
             "fin_juego": fin_juego,
             "reiniciar": True
         })
 
     return jsonify({
         "resultado": resultado,
+        "palabra": palabra_mostrada,
         "vidas": juego_actual.vidas,
         "fin_juego": fin_juego,
         "reiniciar": False
