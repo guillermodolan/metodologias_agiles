@@ -73,7 +73,7 @@ class Ahorcado:
     
     
     def comprueba_fin_de_juego(self):
-        if not '_' in self.muestra_palabra():
+        if not '_' in self.muestra_palabra() or self.vidas == 0:
             self.fin_de_juego = True
         return self.fin_de_juego
     
