@@ -8,7 +8,7 @@ import unittest
 
 class AcceptanceTests(unittest.TestCase):
     def setUp(self):
-        self.driver_path = 'D:\\Users\\NACHO\\Desktop\\MA\\metodologias_agiles\\chromedriver.exe'  # Asegúrate de que esta ruta sea correcta
+        self.driver_path = 'D:\\metodologias_agiles\\chromedriver.exe'  # Asegúrate de que esta ruta sea correcta
         self.service = Service(self.driver_path)
         self.options = webdriver.ChromeOptions()
         self.driver = webdriver.Chrome(service=self.service, options=self.options)
