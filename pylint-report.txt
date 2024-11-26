@@ -11,19 +11,20 @@ tpi_ahorcado/test_ahorcado.py:42: [W0311(bad-indentation), ] Bad indentation. Fo
 tpi_ahorcado/test_ahorcado.py:43: [W0311(bad-indentation), ] Bad indentation. Found 7 spaces, expected 8
 tpi_ahorcado/test_ahorcado.py:44: [W0311(bad-indentation), ] Bad indentation. Found 7 spaces, expected 8
 tpi_ahorcado/test_ahorcado.py:45: [W0311(bad-indentation), ] Bad indentation. Found 7 spaces, expected 8
-tpi_ahorcado/test_ahorcado.py:46: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/test_ahorcado.py:49: [W0311(bad-indentation), ] Bad indentation. Found 7 spaces, expected 8
+tpi_ahorcado/test_ahorcado.py:46: [W0311(bad-indentation), ] Bad indentation. Found 7 spaces, expected 8
+tpi_ahorcado/test_ahorcado.py:47: [C0303(trailing-whitespace), ] Trailing whitespace
 tpi_ahorcado/test_ahorcado.py:50: [W0311(bad-indentation), ] Bad indentation. Found 7 spaces, expected 8
 tpi_ahorcado/test_ahorcado.py:51: [W0311(bad-indentation), ] Bad indentation. Found 7 spaces, expected 8
 tpi_ahorcado/test_ahorcado.py:52: [W0311(bad-indentation), ] Bad indentation. Found 7 spaces, expected 8
-tpi_ahorcado/test_ahorcado.py:53: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/test_ahorcado.py:61: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/test_ahorcado.py:69: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/test_ahorcado.py:84: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/test_ahorcado.py:90: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/test_ahorcado.py:103: [C0303(trailing-whitespace), ] Trailing whitespace
+tpi_ahorcado/test_ahorcado.py:53: [W0311(bad-indentation), ] Bad indentation. Found 7 spaces, expected 8
+tpi_ahorcado/test_ahorcado.py:54: [C0303(trailing-whitespace), ] Trailing whitespace
+tpi_ahorcado/test_ahorcado.py:62: [C0303(trailing-whitespace), ] Trailing whitespace
+tpi_ahorcado/test_ahorcado.py:70: [C0303(trailing-whitespace), ] Trailing whitespace
+tpi_ahorcado/test_ahorcado.py:85: [C0303(trailing-whitespace), ] Trailing whitespace
+tpi_ahorcado/test_ahorcado.py:91: [C0303(trailing-whitespace), ] Trailing whitespace
 tpi_ahorcado/test_ahorcado.py:104: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/test_ahorcado.py:106: [C0304(missing-final-newline), ] Final newline missing
+tpi_ahorcado/test_ahorcado.py:105: [C0303(trailing-whitespace), ] Trailing whitespace
+tpi_ahorcado/test_ahorcado.py:107: [C0304(missing-final-newline), ] Final newline missing
 tpi_ahorcado/test_ahorcado.py:1: [C0114(missing-module-docstring), ] Missing module docstring
 tpi_ahorcado/test_ahorcado.py:4: [C0115(missing-class-docstring), Test] Missing class docstring
 tpi_ahorcado/test_ahorcado.py:6: [C0116(missing-function-docstring), Test.test_acierta_letra] Missing function or method docstring
@@ -31,15 +32,15 @@ tpi_ahorcado/test_ahorcado.py:14: [C0116(missing-function-docstring), Test.test_
 tpi_ahorcado/test_ahorcado.py:22: [C0116(missing-function-docstring), Test.test_falla_letra_descuenta_vida] Missing function or method docstring
 tpi_ahorcado/test_ahorcado.py:31: [C0116(missing-function-docstring), Test.test_fin_de_vidas] Missing function or method docstring
 tpi_ahorcado/test_ahorcado.py:41: [C0116(missing-function-docstring), Test.test_acierta_palabra_correcta] Missing function or method docstring
-tpi_ahorcado/test_ahorcado.py:48: [C0116(missing-function-docstring), Test.test_falla_palabra_correcta] Missing function or method docstring
-tpi_ahorcado/test_ahorcado.py:55: [C0116(missing-function-docstring), Test.test_muestra_palabra] Missing function or method docstring
-tpi_ahorcado/test_ahorcado.py:63: [C0116(missing-function-docstring), Test.test_gana_juego] Missing function or method docstring
-tpi_ahorcado/test_ahorcado.py:71: [C0116(missing-function-docstring), Test.test_guarda_letras_erradas] Missing function or method docstring
-tpi_ahorcado/test_ahorcado.py:80: [C0116(missing-function-docstring), Test.test_verifica_caracter_especial] Missing function or method docstring
-tpi_ahorcado/test_ahorcado.py:86: [C0116(missing-function-docstring), Test.test_verifica_numero] Missing function or method docstring
-tpi_ahorcado/test_ahorcado.py:92: [C0116(missing-function-docstring), Test.test_usa_comodin] Missing function or method docstring
-tpi_ahorcado/test_ahorcado.py:98: [C0116(missing-function-docstring), Test.test_usa_dos_comodines] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:49: [C0116(missing-function-docstring), Test.test_falla_palabra_correcta] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:56: [C0116(missing-function-docstring), Test.test_muestra_palabra] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:64: [C0116(missing-function-docstring), Test.test_gana_juego] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:72: [C0116(missing-function-docstring), Test.test_guarda_letras_erradas] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:81: [C0116(missing-function-docstring), Test.test_verifica_caracter_especial] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:87: [C0116(missing-function-docstring), Test.test_verifica_numero] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:93: [C0116(missing-function-docstring), Test.test_usa_comodin] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:99: [C0116(missing-function-docstring), Test.test_usa_dos_comodines] Missing function or method docstring
 
 -----------------------------------
-Your code has been rated at 5.17/10
+Your code has been rated at 5.11/10
 
