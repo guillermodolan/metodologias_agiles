@@ -1,26 +1,6 @@
 ************* Module tpi_ahorcado
 tpi_ahorcado/__init__.py:1: [C0304(missing-final-newline), ] Final newline missing
 ************* Module tpi_ahorcado.test_ahorcado
-tpi_ahorcado/test_ahorcado.py:27: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/test_ahorcado.py:39: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/test_ahorcado.py:42: [W0311(bad-indentation), ] Bad indentation. Found 7 spaces, expected 8
-tpi_ahorcado/test_ahorcado.py:43: [W0311(bad-indentation), ] Bad indentation. Found 7 spaces, expected 8
-tpi_ahorcado/test_ahorcado.py:44: [W0311(bad-indentation), ] Bad indentation. Found 7 spaces, expected 8
-tpi_ahorcado/test_ahorcado.py:45: [W0311(bad-indentation), ] Bad indentation. Found 7 spaces, expected 8
-tpi_ahorcado/test_ahorcado.py:46: [W0311(bad-indentation), ] Bad indentation. Found 7 spaces, expected 8
-tpi_ahorcado/test_ahorcado.py:47: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/test_ahorcado.py:50: [W0311(bad-indentation), ] Bad indentation. Found 7 spaces, expected 8
-tpi_ahorcado/test_ahorcado.py:51: [W0311(bad-indentation), ] Bad indentation. Found 7 spaces, expected 8
-tpi_ahorcado/test_ahorcado.py:52: [W0311(bad-indentation), ] Bad indentation. Found 7 spaces, expected 8
-tpi_ahorcado/test_ahorcado.py:53: [W0311(bad-indentation), ] Bad indentation. Found 7 spaces, expected 8
-tpi_ahorcado/test_ahorcado.py:54: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/test_ahorcado.py:62: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/test_ahorcado.py:70: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/test_ahorcado.py:85: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/test_ahorcado.py:91: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/test_ahorcado.py:104: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/test_ahorcado.py:105: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/test_ahorcado.py:107: [C0304(missing-final-newline), ] Final newline missing
 tpi_ahorcado/test_ahorcado.py:1: [C0114(missing-module-docstring), ] Missing module docstring
 tpi_ahorcado/test_ahorcado.py:4: [C0115(missing-class-docstring), Test] Missing class docstring
 tpi_ahorcado/test_ahorcado.py:6: [C0116(missing-function-docstring), Test.test_acierta_letra] Missing function or method docstring
@@ -38,5 +18,5 @@ tpi_ahorcado/test_ahorcado.py:93: [C0116(missing-function-docstring), Test.test_
 tpi_ahorcado/test_ahorcado.py:99: [C0116(missing-function-docstring), Test.test_usa_dos_comodines] Missing function or method docstring
 
 -----------------------------------
-Your code has been rated at 5.20/10
+Your code has been rated at 7.87/10
 
