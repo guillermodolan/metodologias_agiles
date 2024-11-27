@@ -23,8 +23,11 @@ class Ahorcado:
         if not letra in caracteres_especiales or not letra.isdigit():
             if self.comprueba_letra_repetida(letra):
                 print('Ya has ingresado esa letra. Por favor ingresá otra.')
+                return False
             else:
                 if letra.lower() in self.palabra.lower():
+                    print(letra.lower())
+                    print(self.palabra.lower())
                     self.letras_adivinadas.append(letra.lower())
                     self.muestra_palabra()
                     print('Acertaste. ¡Continúa así!')
@@ -66,7 +69,7 @@ class Ahorcado:
     def muestra_palabra(self):
         palabra_actual = ''
         for letra in self.palabra:
-            if letra in self.letras_adivinadas:
+            if letra.lower() in self.letras_adivinadas:
                 palabra_actual = palabra_actual + letra
             else:
                 palabra_actual = palabra_actual + '_'

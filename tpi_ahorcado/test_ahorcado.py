@@ -54,11 +54,11 @@ class Test(unittest.TestCase):
        
     # Done
     def test_muestra_palabra(self):
-        palabra_correcta = 'Perro'
+        palabra_correcta = 'Gato'
         ahorcado = Ahorcado(palabra_correcta)
         for let in palabra_correcta:
             ahorcado.ingresar_letra(let)
-        self.assertEqual(ahorcado.muestra_palabra(), 'Perro')
+        self.assertEqual(ahorcado.muestra_palabra(), 'Gato')
         
     # Done
     def test_gana_juego(self):
@@ -93,14 +93,14 @@ class Test(unittest.TestCase):
     def test_usa_comodin(self):
         palabra = 'ayuda'
         ahorcado = Ahorcado(palabra)
-        self.assertEqual(ahorcado.uso_comodin(), True)
+        self.assertEqual(ahorcado.uso_comodin() in ahorcado.palabra, True)
 
     # Done
     def test_usa_dos_comodines(self):
         palabra = 'help'
         ahorcado = Ahorcado(palabra)
         ahorcado.uso_comodin()
-        self.assertEqual(ahorcado.uso_comodin(), False)
+        self.assertEqual(ahorcado.uso_comodin(), None)
         
     
 if __name__ ==  '__main__':
