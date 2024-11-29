@@ -39,6 +39,24 @@ steps:
     pytest --cov=. --cov-report xml
   displayName: 'Run tests with coverage'
   
+- script: |
+    wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
+    unzip chromedriver_linux64.zip
+    sudo mv chromedriver /usr/local/bin/chromedriver
+  displayName: 'Install ChromeDriver'
+
+- script: |
+    nohup python app.py &
+  displayName: 'Start Flask Server'
+
+- script: |
+    pytest --maxfail=5 --disable-warnings -q
+  displayName: 'Run Acceptance Tests'
+
+- script: |
+    pytest --cov=. --cov-report xml --maxfail=5 --disable-warnings -q
+  displayName: 'Run tests with coverage'
+  
   # Configurar git y subir el archivo a GitHub 
 - script: |
     # Configurar git
@@ -69,4 +87,3 @@ steps:
     summaryFileLocation: '$(Build.SourcesDirectory)/coverage.xml'
     reportDirectory: '$(Build.SourcesDirectory)/coverage-report'
   displayName: 'Publish Code Coverage Results'
-
