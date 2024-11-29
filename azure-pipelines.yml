@@ -40,9 +40,14 @@ steps:
 
 - script: |
     pip install pytest pytest-cov pytest-azurepipelines
-    pytest --cov=. --cov-report xml
+    pytest --cov=app --cov-report xml $(Build.SourcesDirectory)/tpi_ahorcado/
   displayName: 'Run tests with coverage'
-  
+
+- script: |
+    export PYTHONPATH=$(Build.SourcesDirectory)/tpi_ahorcado/front-end:$PYTHONPATH
+    pytest --collect-only -q
+  displayName: 'List all discovered tests'
+
 - script: |
     wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
     unzip chromedriver_linux64.zip
