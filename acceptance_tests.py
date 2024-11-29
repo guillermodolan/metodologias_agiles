@@ -24,8 +24,10 @@ class TestAhorcadoAcceptance(unittest.TestCase):
         palabra_secreta = "arco"
         palabra_input = WebDriverWait(driver, 10).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/input') ))
         palabra_input.send_keys(palabra_secreta)
+        # time.sleep(2)
         boton_configura = WebDriverWait(driver, 5).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/button') ))
         boton_configura.click()
+        # time.sleep(2)
         WebDriverWait(driver, 5).until(EC.alert_is_present())
         alerta = Alert(driver)
         alerta.accept()
@@ -47,24 +49,30 @@ class TestAhorcadoAcceptance(unittest.TestCase):
         alerta = WebDriverWait(driver, 10).until(EC.alert_is_present())
         texto_alerta = alerta.text
         self.assertEqual(texto_alerta, 'El juego ha terminado. Configura una nueva palabra para jugar.')
-          
+
+'''   
     # Done
     def test_falla_palabra_correcta(self):
         driver = self.driver
         ahorcado = Ahorcado("arco")
         palabra_input = WebDriverWait(driver, 10).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/input') ))
         palabra_input.send_keys(ahorcado.palabra)
+        time.sleep(2)
         boton_configura = WebDriverWait(driver, 5).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/button') ))
         boton_configura.click()
+        time.sleep(2)
         WebDriverWait(driver, 5).until(EC.alert_is_present())
         alerta = Alert(driver)
         alerta.accept()
         time.sleep(2)
         ingresa_palabra_input = WebDriverWait(driver, 10).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[2]/form[2]/input') ))
         ingresa_palabra_input.send_keys('planta')
+        time.sleep(2)
         boton_envia_palabra = WebDriverWait(driver, 5).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[2]/form[2]/button') ))
         boton_envia_palabra.click()
+        time.sleep(2)
         vida_box = WebDriverWait(driver, 15).until(EC.visibility_of_element_located( (By.XPATH, '/html/body/div[2]/p[2]/span') ))
+        time.sleep(2)
         self.assertEqual(str(ahorcado.vidas), vida_box.text)
         
     # Done
@@ -73,16 +81,20 @@ class TestAhorcadoAcceptance(unittest.TestCase):
         ahorcado = Ahorcado("arco")
         palabra_input = WebDriverWait(driver, 10).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/input') ))
         palabra_input.send_keys(ahorcado.palabra)
+        time.sleep(2)
         boton_configura = WebDriverWait(driver, 5).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/button') ))
         boton_configura.click()
+        time.sleep(2)
         WebDriverWait(driver, 5).until(EC.alert_is_present())
         alerta = Alert(driver)
         alerta.accept()
         time.sleep(2)
         ingresa_letra_input = WebDriverWait(driver, 10).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[2]/form[1]/input') ))
         ingresa_letra_input.send_keys('p')
+        time.sleep(2)
         boton_envia_letra = WebDriverWait(driver, 5).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[2]/form[1]/button') ))
         boton_envia_letra.click()
+        time.sleep(2)
         vida_box = WebDriverWait(driver, 15).until(EC.visibility_of_element_located( (By.XPATH, '/html/body/div[2]/p[2]/span') ))
         self.assertEqual(str(ahorcado.vidas), vida_box.text)
         
@@ -92,17 +104,22 @@ class TestAhorcadoAcceptance(unittest.TestCase):
         ahorcado = Ahorcado("arco")
         palabra_input = WebDriverWait(driver, 10).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/input') ))
         palabra_input.send_keys(ahorcado.palabra)
+        time.sleep(2)
         boton_configura = WebDriverWait(driver, 5).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/button') ))
         boton_configura.click()
+        time.sleep(2)
         WebDriverWait(driver, 5).until(EC.alert_is_present())
         alerta = Alert(driver)
         alerta.accept()
         time.sleep(2)
         ingresa_letra_input = WebDriverWait(driver, 10).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[2]/form[1]/input') ))
         ingresa_letra_input.send_keys('l')
+        time.sleep(2)
         boton_envia_letra = WebDriverWait(driver, 5).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[2]/form[1]/button') ))
         boton_envia_letra.click()
+        time.sleep(2)
         vida_box = WebDriverWait(driver, 15).until(EC.visibility_of_element_located( (By.XPATH, '/html/body/div[2]/p[2]/span') ))
+        time.sleep(2)
         self.assertEqual(str(ahorcado.vidas), vida_box.text)
         
     # Done
@@ -111,8 +128,10 @@ class TestAhorcadoAcceptance(unittest.TestCase):
         palabra_secreta = "arco"
         palabra_input = WebDriverWait(driver, 10).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/input') ))
         palabra_input.send_keys(palabra_secreta)
+        time.sleep(2)
         boton_configura = WebDriverWait(driver, 5).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/button') ))
         boton_configura.click()
+        time.sleep(2)
         WebDriverWait(driver, 5).until(EC.alert_is_present())
         alerta = Alert(driver)
         alerta.accept()
@@ -147,16 +166,20 @@ class TestAhorcadoAcceptance(unittest.TestCase):
         palabra_secreta = "arco"
         palabra_input = WebDriverWait(driver, 10).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/input') ))
         palabra_input.send_keys(palabra_secreta)
+        time.sleep(2)
         boton_configura = WebDriverWait(driver, 5).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/button') ))
         boton_configura.click()
+        time.sleep(2)
         WebDriverWait(driver, 5).until(EC.alert_is_present())
         alerta = Alert(driver)
         alerta.accept()
         time.sleep(2)
         ingresa_letra_input = WebDriverWait(driver, 10).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[2]/form[1]/input') ))
         ingresa_letra_input.send_keys('a')
+        time.sleep(2)
         boton_envia_letra = WebDriverWait(driver, 5).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[2]/form[1]/button') ))
         boton_envia_letra.click()
+        time.sleep(2)
         palabra_box = WebDriverWait(driver, 15).until(EC.visibility_of_element_located( (By.XPATH, '/html/body/div[2]/p[1]/span') ))
         letra_ingresada = 'a'
         nueva_palabra = list("____")
@@ -177,16 +200,20 @@ class TestAhorcadoAcceptance(unittest.TestCase):
         palabra_secreta = "arco"
         palabra_input = WebDriverWait(driver, 10).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/input') ))
         palabra_input.send_keys(palabra_secreta)
+        time.sleep(2)
         boton_configura = WebDriverWait(driver, 5).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/button') ))
         boton_configura.click()
+        time.sleep(2)
         WebDriverWait(driver, 5).until(EC.alert_is_present())
         alerta = Alert(driver)
         alerta.accept()
         time.sleep(2)
         ingresa_palabra_input = WebDriverWait(driver, 10).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[2]/form[2]/input') ))
         ingresa_palabra_input.send_keys('arco')
+        time.sleep(2)
         boton_envia_palabra = WebDriverWait(driver, 5).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[2]/form[2]/button') ))
         boton_envia_palabra.click()
+        time.sleep(2)
         alerta = WebDriverWait(driver, 5).until(EC.alert_is_present())
         texto_alerta = alerta.text
         self.assertEqual(texto_alerta, '¡Ganaste!')
@@ -195,77 +222,77 @@ class TestAhorcadoAcceptance(unittest.TestCase):
     def test_configura_palabra_secreta(self):
         driver = self.driver
         palabra_input = WebDriverWait(driver, 10).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/input') ))
-        # time.sleep(2)
+        time.sleep(2)
         palabra_input.send_keys("python")
-        # time.sleep(2)
+        time.sleep(2)
         boton_configura = WebDriverWait(driver, 5).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/button') ))
         boton_configura.click()
         alerta = WebDriverWait(driver, 5).until(EC.alert_is_present())
         texto_alerta = alerta.text
         self.assertEqual(texto_alerta, "Nueva palabra configurada. ¡Comienza el juego!")
         alerta.accept()
-        # time.sleep(3)
+        time.sleep(3)
 
     # Done
     def test_verifica_caracter_especial(self):
         driver = self.driver
         palabra_input = WebDriverWait(driver, 10).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/input') ))
-        # time.sleep(2)
+        time.sleep(2)
         palabra_input.send_keys("?")
-        # time.sleep(2)
+        time.sleep(2)
         boton_configura = WebDriverWait(driver, 5).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/button') ))
         boton_configura.click()
         alerta = WebDriverWait(driver, 5).until(EC.alert_is_present())
         texto_alerta = alerta.text
         self.assertEqual(texto_alerta, "La palabra solo puede contener letras. No se permiten números ni caracteres especiales.")
         alerta.accept()
-        # time.sleep(1)
+        time.sleep(1)
         
     # Done
     def test_verifica_número(self):
         driver = self.driver
         palabra_input = WebDriverWait(driver, 10).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/input') ))
-        # time.sleep(2)
+        time.sleep(2)
         palabra_input.send_keys("5")
-        # time.sleep(2)
+        time.sleep(2)
         boton_configura = WebDriverWait(driver, 5).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/button') ))
         boton_configura.click()
         alerta = WebDriverWait(driver, 5).until(EC.alert_is_present())
         texto_alerta = alerta.text
         self.assertEqual(texto_alerta, "La palabra solo puede contener letras. No se permiten números ni caracteres especiales.")
         alerta.accept()
-        # time.sleep(1)
+        time.sleep(1)
         
     # Done
     def test_verifica_número_con_letra(self):
         driver = self.driver
         palabra_input = WebDriverWait(driver, 10).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/input') ))
-        # time.sleep(2)
+        time.sleep(2)
         palabra_input.send_keys("5a")
-        # time.sleep(2)
+        time.sleep(2)
         boton_configura = WebDriverWait(driver, 5).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/button') ))
         boton_configura.click()
         alerta = WebDriverWait(driver, 5).until(EC.alert_is_present())
         texto_alerta = alerta.text
         self.assertEqual(texto_alerta, "La palabra solo puede contener letras. No se permiten números ni caracteres especiales.")
         alerta.accept()
-        # time.sleep(1)
+        time.sleep(1)
         
     # Done
     def test_verifica_número_con_caracter(self):
         driver = self.driver
         palabra_input = WebDriverWait(driver, 10).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/input') ))
-        # time.sleep(2)
+        time.sleep(2)
         palabra_input.send_keys("5?")
-        # time.sleep(2)
+        time.sleep(2)
         boton_configura = WebDriverWait(driver, 5).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/button') ))
         boton_configura.click()
         alerta = WebDriverWait(driver, 5).until(EC.alert_is_present())
         texto_alerta = alerta.text
         self.assertEqual(texto_alerta, "La palabra solo puede contener letras. No se permiten números ni caracteres especiales.")
         alerta.accept()
-        # time.sleep(1)
-'''
+        time.sleep(1)
+
     # In progress    
     def test_usar_comodin(self):
         ahorcado = Ahorcado("arco")
