@@ -59,18 +59,17 @@ steps:
   
   # Configurar git y subir el archivo a GitHub 
 - script: |
-    # Configurar git
     git config --global user.name "guillermodolan"
     git config --global user.email "guillermo230899@gmail.com"
 
     git clone https://$(GITHUB_TOKEN)@github.com/guillermodolan/metodologias_agiles.git $(Build.SourcesDirectory)/repo
 
-    mv $(Build.SourcesDirectory)/pylint-report.txt $(Build.SourcesDirectory)/repo/
+    mv $(Build.SourcesDirectory)/acceptance-test-results.txt $(Build.SourcesDirectory)/repo/
     cd $(Build.SourcesDirectory)/repo
-    git add pylint-report.txt
-    git commit -m "Add pylint report"
+    git add acceptance-test-results.txt
+    git commit -m "Add acceptance test results"
     git push origin main
-  displayName: 'Push Pylint Report to GitHub'
+  displayName: 'Push Acceptance Test Results to GitHub'
   env:
     GITHUB_TOKEN: $(GITHUB_TOKEN)
 
