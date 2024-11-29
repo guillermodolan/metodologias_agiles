@@ -1,0 +1,30 @@
+##vso[task.logissue type=warning;]The hookimpl CovPlugin.pytest_configure_node uses old-style configuration options (marks or attributes).
+Please use the pytest.hookimpl(optionalhook=True) decorator instead
+ to configure the hooks.
+ See https://docs.pytest.org/en/latest/deprecations.html#configuring-hook-specs-impls-using-markers
+##vso[task.logissue type=warning;]The hookimpl CovPlugin.pytest_testnodedown uses old-style configuration options (marks or attributes).
+Please use the pytest.hookimpl(optionalhook=True) decorator instead
+ to configure the hooks.
+ See https://docs.pytest.org/en/latest/deprecations.html#configuring-hook-specs-impls-using-markers
+============================= test session starts ==============================
+platform linux -- Python 3.11.10, pytest-8.3.3, pluggy-1.5.0
+rootdir: /home/vsts/work/1/s
+plugins: nunit-1.0.7, azurepipelines-1.0.5, cov-3.0.0
+collected 21 items
+
+tpi_ahorcado/test_ahorcado.py .....................                      [100%]##vso[results.publish type=NUnit;runTitle='Pytest results';publishRunAttachments=true;]/home/vsts/work/1/s/test-output.xml
+##vso[codecoverage.publish codecoveragetool=Cobertura;summaryfile=/home/vsts/work/1/s/coverage.xml;reportdirectory=/home/vsts/work/1/s/htmlcov;]
+
+
+-------- generated Nunit xml file: /home/vsts/work/1/s/test-output.xml ---------
+
+---------- coverage: platform linux, python 3.11.10-final-0 ----------
+Name     Stmts   Miss  Cover   Missing
+--------------------------------------
+app.py      41      1    98%   94
+--------------------------------------
+TOTAL       41      1    98%
+Coverage HTML written to dir htmlcov
+Coverage XML written to file /home/vsts/work/1/s/coverage.xml
+
+======================== 21 passed, 2 warnings in 0.43s ========================
