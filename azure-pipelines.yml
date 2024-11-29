@@ -50,7 +50,7 @@ steps:
   displayName: 'Start Flask Server'
 
 - script: |
-    pytest --maxfail=5 --disable-warnings -q
+    pytest --maxfail=5 --disable-warnings --cov=app --cov-report=xml
   displayName: 'Run Acceptance Tests'
 
 - script: |
@@ -76,10 +76,10 @@ steps:
 
 - task: PublishTestResults@2
   inputs:
-    testResultsFiles: '**/test-*.xml'
-    testRunTitle: 'Publish Test Results'
     testResultsFormat: 'JUnit'
-  displayName: 'Publish test results'
+    testResultsFiles: '**/TEST-*.xml'
+    mergeTestResults: true
+    failTaskOnFailedTests: true
 
 - task: PublishCodeCoverageResults@1
   inputs:
