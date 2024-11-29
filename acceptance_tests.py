@@ -9,6 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from Ahorcado import Ahorcado
 import app
 
+
 class TestAhorcadoAcceptance(unittest.TestCase):
 
     def setUp(self):
