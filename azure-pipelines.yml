@@ -50,7 +50,7 @@ steps:
   displayName: 'Start Flask Server'
 
 - script: |
-    pytest --maxfail=5 --disable-warnings --cov=app --cov-report term-missing > $(Build.SourcesDirectory)/acceptance-test-results.txt
+    pytest $(Build.SourcesDirectory)/acceptance_tests.py --maxfail=5 --disable-warnings --cov=app --cov-report term-missing > $(Build.SourcesDirectory)/acceptance-test-results.txt
   displayName: 'Run Acceptance Tests'
 
 - script: |
