@@ -7,7 +7,6 @@ from selenium.webdriver.ie.service import Service
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from Ahorcado import Ahorcado
-import app
 
 
 class TestAhorcadoAcceptance(unittest.TestCase):
