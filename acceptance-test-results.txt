@@ -27,4 +27,4 @@ TOTAL       41      1    98%
 Coverage HTML written to dir htmlcov
 Coverage XML written to file /home/vsts/work/1/s/coverage.xml
 
-======================== 21 passed, 2 warnings in 0.43s ========================
+======================== 21 passed, 2 warnings in 0.42s ========================
