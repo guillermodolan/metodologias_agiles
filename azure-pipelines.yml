@@ -47,6 +47,7 @@ steps:
 
 - script: |
     nohup python app.py &
+    sleep 5
   displayName: 'Start Flask Server'
 
 - script: |
