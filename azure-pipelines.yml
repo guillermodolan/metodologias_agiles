@@ -39,8 +39,7 @@ steps:
   displayName: 'Run Pylint Static Code Analysis'
 
 - script: |
-    pip install pytest pytest-cov pytest-azurepipelines
-    pytest --cov=app --cov-report xml $(Build.SourcesDirectory)/tpi_ahorcado/
+    pytest --cov=. --cov-report xml --maxfail=5 --disable-warnings -q
   displayName: 'Run tests with coverage'
 
 - script: |
