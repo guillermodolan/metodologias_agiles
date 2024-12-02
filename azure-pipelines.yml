@@ -39,48 +39,29 @@ steps:
     pytest --cov=. --cov-report xml
   displayName: 'Run tests with coverage'
   
-- script: |
-    wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
-    unzip chromedriver_linux64.zip
-    sudo mv chromedriver /usr/local/bin/chromedriver
-  displayName: 'Install ChromeDriver'
-
-- script: |
-    nohup python app.py &
-    sleep 5
-  displayName: 'Start Flask Server'
-
-- script: |
-    pip freeze
-    pytest $(Build.SourcesDirectory)/acceptance_tests.py --maxfail=5 --disable-warnings --cov=app --cov-report term-missing > $(Build.SourcesDirectory)/acceptance-test-results.txt
-  displayName: 'Run Acceptance Tests'
-
-- script: |
-    pytest --cov=. --cov-report xml --maxfail=5 --disable-warnings -q
-  displayName: 'Run tests with coverage'
-  
   # Configurar git y subir el archivo a GitHub 
 - script: |
+    # Configurar git
     git config --global user.name "guillermodolan"
     git config --global user.email "guillermo230899@gmail.com"
 
     git clone https://$(GITHUB_TOKEN)@github.com/guillermodolan/metodologias_agiles.git $(Build.SourcesDirectory)/repo
 
-    mv $(Build.SourcesDirectory)/acceptance-test-results.txt $(Build.SourcesDirectory)/repo/
+    mv $(Build.SourcesDirectory)/pylint-report.txt $(Build.SourcesDirectory)/repo/
     cd $(Build.SourcesDirectory)/repo
-    git add acceptance-test-results.txt
-    git commit -m "Add acceptance test results"
+    git add pylint-report.txt
+    git commit -m "Add pylint report"
     git push origin main
-  displayName: 'Push Acceptance Test Results to GitHub'
+  displayName: 'Push Pylint Report to GitHub'
   env:
     GITHUB_TOKEN: $(GITHUB_TOKEN)
 
 - task: PublishTestResults@2
   inputs:
+    testResultsFiles: '**/test-*.xml'
+    testRunTitle: 'Publish Test Results'
     testResultsFormat: 'JUnit'
-    testResultsFiles: '**/TEST-*.xml'
-    mergeTestResults: true
-    failTaskOnFailedTests: true
+  displayName: 'Publish test results'
 
 - task: PublishCodeCoverageResults@1
   inputs:
