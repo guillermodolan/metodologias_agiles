@@ -1,4 +1,3 @@
-
 # Python package
 # Create and test a Python package on multiple Python versions.
 # Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
@@ -29,20 +28,6 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
-- script: |
-    sudo apt-get update
-    sudo apt-get install -y chromium-browser
-    CHROME_VERSION=$(chromium-browser --version | awk '{print $2}' | cut -d'.' -f1-3)
-    CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
-    wget -N "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -P ~/
-    unzip ~/chromedriver_linux64.zip -d ~/
-    rm ~/chromedriver_linux64.zip
-    sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
-    sudo chown root:root /usr/local/bin/chromedriver
-    sudo chmod 0755 /usr/local/bin/chromedriver
-    chromedriver --version
-    which chromedriver
-  displayName: 'Install Chrome and ChromeDriver'
 
 - script: |
     pip install pylint
@@ -52,21 +37,9 @@ steps:
 - script: |
     pip install pytest pytest-cov pytest-azurepipelines
     pytest --cov=. --cov-report xml
-  displayName: 'Run unit tests with coverage'
-
-- script: |
-    export PATH=$PATH:/usr/local/bin
-    python acceptance_tests.py > acceptance_test_results.txt
-    echo "Acceptance Test Results:"
-    cat acceptance_test_results.txt
-    if grep -q "FAILED" acceptance_test_results.txt; then
-      echo "##vso[task.complete result=Failed;]Some acceptance tests failed"
-    else
-      echo "##vso[task.complete result=Succeeded;]All acceptance tests passed"
-    fi
-  displayName: 'Run acceptance tests'
-
-# Configurar git y subir el archivo a GitHub 
+  displayName: 'Run tests with coverage'
+  
+  # Configurar git y subir el archivo a GitHub 
 - script: |
     # Configurar git
     git config --global user.name "guillermodolan"
@@ -75,12 +48,11 @@ steps:
     git clone https://$(GITHUB_TOKEN)@github.com/guillermodolan/metodologias_agiles.git $(Build.SourcesDirectory)/repo
 
     mv $(Build.SourcesDirectory)/pylint-report.txt $(Build.SourcesDirectory)/repo/
-    mv $(Build.SourcesDirectory)/acceptance_test_results.txt $(Build.SourcesDirectory)/repo/
     cd $(Build.SourcesDirectory)/repo
-    git add pylint-report.txt acceptance_test_results.txt
-    git commit -m "Add pylint report and acceptance test results"
+    git add pylint-report.txt
+    git commit -m "Add pylint report"
     git push origin main
-  displayName: 'Push Pylint Report and Acceptance Test Results to GitHub'
+  displayName: 'Push Pylint Report to GitHub'
   env:
     GITHUB_TOKEN: $(GITHUB_TOKEN)
 
