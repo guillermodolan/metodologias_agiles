@@ -7,9 +7,9 @@ tpi_ahorcado/test_ahorcado.py:69: [C0301(line-too-long), ] Line too long (103/10
 tpi_ahorcado/test_ahorcado.py:78: [C0301(line-too-long), ] Line too long (123/100)
 tpi_ahorcado/test_ahorcado.py:96: [C0301(line-too-long), ] Line too long (112/100)
 tpi_ahorcado/test_ahorcado.py:111: [C0301(line-too-long), ] Line too long (112/100)
-tpi_ahorcado/test_ahorcado.py:156: [C0301(line-too-long), ] Line too long (120/100)
-tpi_ahorcado/test_ahorcado.py:162: [C0301(line-too-long), ] Line too long (140/100)
-tpi_ahorcado/test_ahorcado.py:176: [C0301(line-too-long), ] Line too long (110/100)
+tpi_ahorcado/test_ahorcado.py:155: [C0301(line-too-long), ] Line too long (120/100)
+tpi_ahorcado/test_ahorcado.py:161: [C0301(line-too-long), ] Line too long (140/100)
+tpi_ahorcado/test_ahorcado.py:175: [C0301(line-too-long), ] Line too long (110/100)
 tpi_ahorcado/test_ahorcado.py:1: [C0114(missing-module-docstring), ] Missing module docstring
 tpi_ahorcado/test_ahorcado.py:5: [C0115(missing-class-docstring), Test] Missing class docstring
 tpi_ahorcado/test_ahorcado.py:12: [C0116(missing-function-docstring), Test.test_index] Missing function or method docstring
@@ -29,11 +29,11 @@ tpi_ahorcado/test_ahorcado.py:118: [C0116(missing-function-docstring), Test.test
 tpi_ahorcado/test_ahorcado.py:126: [C0116(missing-function-docstring), Test.test_gana_juego] Missing function or method docstring
 tpi_ahorcado/test_ahorcado.py:134: [C0116(missing-function-docstring), Test.test_guarda_letras_erradas] Missing function or method docstring
 tpi_ahorcado/test_ahorcado.py:143: [C0116(missing-function-docstring), Test.test_verifica_caracter_especial] Missing function or method docstring
-tpi_ahorcado/test_ahorcado.py:149: [C0116(missing-function-docstring), Test.test_verifica_numero] Missing function or method docstring
-tpi_ahorcado/test_ahorcado.py:155: [C0116(missing-function-docstring), Test.test_usar_comodin] Missing function or method docstring
-tpi_ahorcado/test_ahorcado.py:161: [C0116(missing-function-docstring), Test.test_usar_comodin_app] Missing function or method docstring
-tpi_ahorcado/test_ahorcado.py:168: [C0116(missing-function-docstring), Test.test_usar_dos_comodines] Missing function or method docstring
-tpi_ahorcado/test_ahorcado.py:175: [C0116(missing-function-docstring), Test.test_reiniciar] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:148: [C0116(missing-function-docstring), Test.test_verifica_numero] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:154: [C0116(missing-function-docstring), Test.test_usar_comodin] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:160: [C0116(missing-function-docstring), Test.test_usar_comodin_app] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:167: [C0116(missing-function-docstring), Test.test_usar_dos_comodines] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:174: [C0116(missing-function-docstring), Test.test_reiniciar] Missing function or method docstring
 tpi_ahorcado/test_ahorcado.py:5: [R0904(too-many-public-methods), Test] Too many public methods (23/20)
 
 -----------------------------------
