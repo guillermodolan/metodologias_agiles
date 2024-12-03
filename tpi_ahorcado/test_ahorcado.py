@@ -141,7 +141,6 @@ class Test(unittest.TestCase):
         self.assertEqual(ahorcado.muestra_letras_erradas(),['h','c','v'])
 
     def test_verifica_caracter_especial(self):
-        # Compruebo que no puedo ingresar ningún caracter cuando ingreso una letra
         palabra = 'scrum'
         ahorcado = Ahorcado(palabra)
         self.assertFalse(ahorcado.ingresar_letra('?'))
