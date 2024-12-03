@@ -12,17 +12,65 @@ from app import app
 
 class TestAhorcadoAcceptance(unittest.TestCase):
 
+    # def setUp(self):
+    #    # driver_path = 'C:\\metodologias_agiles\\chromedriver.exe'
+    #    driver_path = '/usr/local/bin/chromedriver'
+    #    service = Service(driver_path)
+    #    options = webdriver.ChromeOptions()
+    #    options.add_argument('--start-maximized')
+    #    options.add_argument('--headless')
+    #    options.add_argument('--no-sandbox')
+    #    options.add_argument('--disable-dev-shm-usage')
+    #    self.driver = webdriver.Chrome(service=service, options=options)
+    #    self.driver.get("http://localhost:5000")
+
     def setUp(self):
-        # driver_path = 'C:\\metodologias_agiles\\chromedriver.exe'
-        driver_path = '/usr/local/bin/chromedriver'
-        service = Service(driver_path)
-        options = webdriver.ChromeOptions()
-        options.add_argument('--start-maximized')
-        options.add_argument('--headless')
-        options.add_argument('--no-sandbox')
-        options.add_argument('--disable-dev-shm-usage')
-        self.driver = webdriver.Chrome(service=service, options=options)
-        self.driver.get("http://localhost:5000")
+        try:
+            # Ruta al ChromeDriver
+            driver_path = '/usr/local/bin/chromedriver'
+            
+            # Configuración del servicio
+            service = Service(driver_path)
+            
+            # Opciones de Chrome
+            options = webdriver.ChromeOptions()
+            
+            # Configuraciones para entornos de CI/CD
+            options.add_argument('--headless')
+            options.add_argument('--no-sandbox')
+            options.add_argument('--disable-dev-shm-usage')
+            options.add_argument('--remote-debugging-port=9222')
+            options.add_argument('--disable-gpu')
+            options.add_argument('--window-size=1920,1080')
+            
+            # Configuraciones de seguridad adicionales
+            options.add_experimental_option('excludeSwitches', ['enable-logging'])
+            
+            # Intentar inicializar el WebDriver con reintentos
+            max_attempts = 3
+            for attempt in range(max_attempts):
+                try:
+                    self.driver = webdriver.Chrome(service=service, options=options)
+                    break
+                except Exception as e:
+                    if attempt == max_attempts - 1:
+                        raise
+                    print(f"Attempt {attempt + 1} failed. Retrying...")
+                    time.sleep(2)
+            
+            # Configurar tiempo de espera
+            self.driver.implicitly_wait(10)
+            
+            # Navegar a la URL
+            self.driver.get("http://localhost:5000")
+        
+        except Exception as e:
+            print(f"Error en setUp: {e}")
+            raise
+
+    def tearDown(self):
+        if hasattr(self, 'driver'):
+            self.driver.quit()
 
     # Done
     def test_falla_letra(self):
