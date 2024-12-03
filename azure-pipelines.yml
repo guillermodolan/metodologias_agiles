@@ -32,8 +32,15 @@ steps:
 - script: |
     sudo apt-get update
     sudo apt-get install -y chromium-browser
-    sudo apt-get install -y chromium-chromedriver
-    export PATH=$PATH:/usr/lib/chromium-browser/
+    CHROME_VERSION=$(chromium-browser --version | awk '{print $2}' | cut -d'.' -f1-3)
+    CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
+    wget -N "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -P ~/
+    unzip ~/chromedriver_linux64.zip -d ~/
+    rm ~/chromedriver_linux64.zip
+    sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
+    sudo chown root:root /usr/local/bin/chromedriver
+    sudo chmod 0755 /usr/local/bin/chromedriver
+    chromedriver --version
     which chromedriver
   displayName: 'Install Chrome and ChromeDriver'
 
@@ -48,6 +55,7 @@ steps:
   displayName: 'Run unit tests with coverage'
 
 - script: |
+    export PATH=$PATH:/usr/local/bin
     python acceptance_tests.py > acceptance_test_results.txt
     echo "Acceptance Test Results:"
     cat acceptance_test_results.txt
