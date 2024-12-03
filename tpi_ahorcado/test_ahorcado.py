@@ -158,7 +158,7 @@ class Test(unittest.TestCase):
         ahorcado = Ahorcado(palabra)
         self.assertIn(ahorcado.uso_comodin(), ahorcado.palabra)
 
-    def test_usar_comodin(self):
+    def test_usar_comodin_app(self):
         # Compruebo la funcionalidad de que cuando uso un comodín, este me devuelve una letra perteneciente a la palabra desde la aplicación
         self.app.post('/configurar_palabra', data={'palabra': 'ayuda'})
         response = self.app.post('/usar_comodin')
