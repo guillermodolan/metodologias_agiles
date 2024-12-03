@@ -1,5 +1,9 @@
 import unittest
 import time
+import os
+import shutil
+import traceback
+from selenium.webdriver.chrome.service import Service
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.alert import Alert
@@ -26,16 +30,34 @@ class TestAhorcadoAcceptance(unittest.TestCase):
 
     def setUp(self):
         try:
-            # Ruta al ChromeDriver
-            driver_path = '/usr/local/bin/chromedriver'
+            # Intentar localizar ChromeDriver y Chrome
+            chrome_path = shutil.which('google-chrome')
+            chromedriver_path = shutil.which('chromedriver')
+
+            if not chrome_path:
+                chrome_path = '/usr/bin/google-chrome'
             
+            if not chromedriver_path:
+                chromedriver_path = '/usr/local/bin/chromedriver'
+
+            print(f"Chrome Path: {chrome_path}")
+            print(f"ChromeDriver Path: {chromedriver_path}")
+
+            # Verificar si los archivos existen
+            if not os.path.isfile(chrome_path):
+                raise FileNotFoundError(f"Chrome not found at {chrome_path}")
+            
+            if not os.path.isfile(chromedriver_path):
+                raise FileNotFoundError(f"ChromeDriver not found at {chromedriver_path}")
+
             # Configuración del servicio
-            service = Service(driver_path)
+            service = Service(chromedriver_path)
             
             # Opciones de Chrome
             options = webdriver.ChromeOptions()
             
             # Configuraciones para entornos de CI/CD
+            options.binary_location = chrome_path
             options.add_argument('--headless')
             options.add_argument('--no-sandbox')
             options.add_argument('--disable-dev-shm-usage')
@@ -43,20 +65,8 @@ class TestAhorcadoAcceptance(unittest.TestCase):
             options.add_argument('--disable-gpu')
             options.add_argument('--window-size=1920,1080')
             
-            # Configuraciones de seguridad adicionales
-            options.add_experimental_option('excludeSwitches', ['enable-logging'])
-            
-            # Intentar inicializar el WebDriver con reintentos
-            max_attempts = 3
-            for attempt in range(max_attempts):
-                try:
-                    self.driver = webdriver.Chrome(service=service, options=options)
-                    break
-                except Exception as e:
-                    if attempt == max_attempts - 1:
-                        raise
-                    print(f"Attempt {attempt + 1} failed. Retrying...")
-                    time.sleep(2)
+            # Intentar inicializar el WebDriver
+            self.driver = webdriver.Chrome(service=service, options=options)
             
             # Configurar tiempo de espera
             self.driver.implicitly_wait(10)
@@ -65,7 +75,7 @@ class TestAhorcadoAcceptance(unittest.TestCase):
             self.driver.get("http://localhost:5000")
         
         except Exception as e:
-            print(f"Error en setUp: {e}")
+            print(f"Error completo en setUp: {traceback.format_exc()}")
             raise
 
     def tearDown(self):

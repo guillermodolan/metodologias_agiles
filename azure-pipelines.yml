@@ -56,9 +56,12 @@ steps:
   displayName: 'Install Compatible Chrome and ChromeDriver'
 
 - script: |
-    google-chrome --version
-    chromedriver --version
-  displayName: 'Check Chrome and ChromeDriver Versions'
+  # Verificar instalaciones
+  which google-chrome
+  which chromedriver
+  google-chrome --version
+  chromedriver --version
+displayName: 'Verify Chrome and ChromeDriver'
 
 - script: |
     pip install pylint
