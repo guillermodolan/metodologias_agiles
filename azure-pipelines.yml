@@ -61,7 +61,7 @@ steps:
   which chromedriver
   google-chrome --version
   chromedriver --version
-displayName: 'Verify Chrome and ChromeDriver'
+  displayName: 'Verify Chrome and ChromeDriver'
 
 - script: |
     pip install pylint
