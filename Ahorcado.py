@@ -2,7 +2,7 @@ import string, random
 
 class Ahorcado:
 
-    def __init__(self, palabra):
+    def __init__(self, palabra=None):
         self.palabra = palabra
         self.vidas = 6 # Definimos 6 vidas (cabeza, tronco, brazos (2) y piernas (2))
         self.letras_adivinadas = []

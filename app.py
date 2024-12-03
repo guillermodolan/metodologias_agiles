@@ -2,12 +2,11 @@ from flask import Flask, render_template, request, jsonify
 from Ahorcado import Ahorcado
 
 app = Flask(__name__)
-
-juego_actual = Ahorcado("python")
+juego_actual = Ahorcado()
 
 @app.route('/')
 def index():
-    return render_template('index.html', vidas=juego_actual.vidas, palabra=juego_actual.muestra_palabra(), erradas=juego_actual.muestra_letras_erradas())
+    return render_template('index.html')
 
 @app.route('/configurar_palabra', methods=['POST'])
 def configurar_palabra():
@@ -36,7 +35,6 @@ def ingresar_letra():
             "fin_juego": fin_juego,
             "reiniciar": True
         })
-    
     return jsonify({
         "acierto": resultado,
         "vidas": juego_actual.vidas,
