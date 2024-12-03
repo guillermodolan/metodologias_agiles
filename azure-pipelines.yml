@@ -28,6 +28,28 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
+- script: |
+    # Instalar ChromeDriver
+    CHROME_DRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+    wget -N https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip -P ~/tmp
+    unzip ~/tmp/chromedriver_linux64.zip -d ~/tmp
+    sudo mv -f ~/tmp/chromedriver /usr/local/bin/chromedriver
+    sudo chown root:root /usr/local/bin/chromedriver
+    sudo chmod 0755 /usr/local/bin/chromedriver
+  displayName: 'Install ChromeDriver'
+
+- script: |
+    # Instalar Google Chrome
+    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+    sudo apt-get update
+    sudo apt-get install -y google-chrome-stable
+  displayName: 'Install Google Chrome'
+
+- script: |
+    google-chrome --version
+    chromedriver --version
+  displayName: 'Check Chrome and ChromeDriver Versions'
 
 - script: |
     pip install pylint
