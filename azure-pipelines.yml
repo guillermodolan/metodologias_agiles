@@ -56,11 +56,11 @@ steps:
   displayName: 'Install Compatible Chrome and ChromeDriver'
 
 - script: |
-  # Verificar instalaciones
-  which google-chrome
-  which chromedriver
-  google-chrome --version
-  chromedriver --version
+    # Verificar instalaciones
+    which google-chrome
+    which chromedriver
+    google-chrome --version
+    chromedriver --version
   displayName: 'Verify Chrome and ChromeDriver'
 
 - script: |
