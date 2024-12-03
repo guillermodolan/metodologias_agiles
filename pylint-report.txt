@@ -31,12 +31,11 @@ tpi_ahorcado/test_ahorcado.py:134: [C0116(missing-function-docstring), Test.test
 tpi_ahorcado/test_ahorcado.py:143: [C0116(missing-function-docstring), Test.test_verifica_caracter_especial] Missing function or method docstring
 tpi_ahorcado/test_ahorcado.py:149: [C0116(missing-function-docstring), Test.test_verifica_numero] Missing function or method docstring
 tpi_ahorcado/test_ahorcado.py:155: [C0116(missing-function-docstring), Test.test_usar_comodin] Missing function or method docstring
-tpi_ahorcado/test_ahorcado.py:161: [C0116(missing-function-docstring), Test.test_usar_comodin] Missing function or method docstring
-tpi_ahorcado/test_ahorcado.py:161: [E0102(function-redefined), Test.test_usar_comodin] method already defined line 155
+tpi_ahorcado/test_ahorcado.py:161: [C0116(missing-function-docstring), Test.test_usar_comodin_app] Missing function or method docstring
 tpi_ahorcado/test_ahorcado.py:168: [C0116(missing-function-docstring), Test.test_usar_dos_comodines] Missing function or method docstring
 tpi_ahorcado/test_ahorcado.py:175: [C0116(missing-function-docstring), Test.test_reiniciar] Missing function or method docstring
-tpi_ahorcado/test_ahorcado.py:5: [R0904(too-many-public-methods), Test] Too many public methods (22/20)
+tpi_ahorcado/test_ahorcado.py:5: [R0904(too-many-public-methods), Test] Too many public methods (23/20)
 
 -----------------------------------
-Your code has been rated at 7.01/10
+Your code has been rated at 7.39/10
 
