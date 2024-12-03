@@ -38,6 +38,12 @@ steps:
     pip install pytest pytest-cov pytest-azurepipelines
     pytest --cov=. --cov-report xml
   displayName: 'Run tests with coverage'
+
+- script: |
+    pip install -r requirements.txt
+    pip install pytest pytest-cov pytest-azurepipelines
+    pytest acceptance_tests.py --cov=. --cov-report xml
+  displayName: 'Run Acceptance Tests with coverage'
   
   # Configurar git y subir el archivo a GitHub 
 - script: |
@@ -69,3 +75,10 @@ steps:
     summaryFileLocation: '$(Build.SourcesDirectory)/coverage.xml'
     reportDirectory: '$(Build.SourcesDirectory)/coverage-report'
   displayName: 'Publish Code Coverage Results'
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFiles: '**/test-acceptance*.xml'
+    testRunTitle: 'Acceptance Tests Results'
+    testResultsFormat: 'JUnit'
+  displayName: 'Publish Acceptance Test Results'
