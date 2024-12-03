@@ -30,6 +30,14 @@ steps:
   displayName: 'Install dependencies'
 
 - script: |
+    sudo apt-get update
+    sudo apt-get install -y chromium-browser
+    sudo apt-get install -y chromium-chromedriver
+    export PATH=$PATH:/usr/lib/chromium-browser/
+    which chromedriver
+  displayName: 'Install Chrome and ChromeDriver'
+
+- script: |
     pip install pylint
     pylint --exit-zero $(Build.SourcesDirectory)/tpi_ahorcado --output-format=parseable > $(Build.SourcesDirectory)/pylint-report.txt
   displayName: 'Run Pylint Static Code Analysis'
