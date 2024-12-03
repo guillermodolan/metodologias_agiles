@@ -29,29 +29,31 @@ steps:
   displayName: 'Install dependencies'
 
 - script: |
-    # Actualizar e instalar dependencias
-    sudo apt-get update
-    sudo apt-get install -y \
-      unzip \
-      wget \
-      curl \
-      libgconf-2-4 \
-      libstdc++6 \
-      xvfb
+    # Obtener la versión de Chrome estable
+    CHROME_VERSION=$(google-chrome --version | cut -d ' ' -f 3 | cut -d '.' -f 1)
 
-    # Instalar ChromeDriver
-    CHROME_DRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-    wget -N https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip -P ~/tmp
+    # Obtener la versión correspondiente de ChromeDriver
+    CHROMEDRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION})
+
+    echo "Chrome Version: $CHROME_VERSION"
+    echo "ChromeDriver Version: $CHROMEDRIVER_VERSION"
+
+    # Descargar ChromeDriver específico para la versión de Chrome
+    wget -N https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip -P ~/tmp
     unzip ~/tmp/chromedriver_linux64.zip -d ~/tmp
     sudo mv -f ~/tmp/chromedriver /usr/local/bin/chromedriver
     sudo chown root:root /usr/local/bin/chromedriver
     sudo chmod 0755 /usr/local/bin/chromedriver
 
-    # Instalar Google Chrome
+    # Descargar e instalar Chrome estable
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     sudo dpkg -i google-chrome-stable_current_amd64.deb
     sudo apt-get install -f -y
-  displayName: 'Install Chrome and ChromeDriver'
+
+    # Verificar versiones instaladas
+    google-chrome --version
+    chromedriver --version
+  displayName: 'Install Compatible Chrome and ChromeDriver'
 
 - script: |
     google-chrome --version
