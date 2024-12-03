@@ -146,7 +146,6 @@ class Test(unittest.TestCase):
         self.assertFalse(ahorcado.ingresar_letra('?'))
 
     def test_verifica_numero(self):
-        # Compruebo que no puedo ingresar ningún caracter cuando ingreso un número
         palabra = 'accesible'
         ahorcado = Ahorcado(palabra)
         self.assertFalse(ahorcado.ingresar_letra('5'))
