@@ -13,7 +13,8 @@ from app import app
 class TestAhorcadoAcceptance(unittest.TestCase):
 
     def setUp(self):
-        driver_path = 'C:\\metodologias_agiles\\chromedriver.exe'
+        # driver_path = 'C:\\metodologias_agiles\\chromedriver.exe'
+        driver_path = '/usr/local/bin/chromedriver'
         service = Service(driver_path)
         options = webdriver.ChromeOptions()
         options.add_argument('--start-maximized')
