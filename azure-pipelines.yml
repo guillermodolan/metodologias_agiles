@@ -83,11 +83,9 @@ steps:
   - script: |
       # Eliminar node_modules y otros archivos innecesarios
       rm -rf node_modules
-      rm -rf .git
       rm -rf .vscode
       rm -f *.log
       rm -f .env
-      git clean -fdx
     displayName: 'Compress project files excluding unnecessary files'
 
   - script: |
