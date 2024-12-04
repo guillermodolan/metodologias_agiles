@@ -62,7 +62,7 @@ class TestAhorcadoAcceptance(unittest.TestCase):
         if hasattr(self, 'driver'):
             self.driver.quit()
 
-    # Done
+# Done
     def test_falla_letra(self):
         driver = self.driver
         palabra = "arco"
