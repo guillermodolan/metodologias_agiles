@@ -75,24 +75,28 @@ steps:
     displayName: 'Run tests with coverage'
 
   - script: |
-      tar -czf project.tar.gz .
-      echo "Project compressed into project.tar.gz"
-    displayName: 'Compress project files'
-
-    
-
-  - script: |
       pip install -r requirements.txt
       pip install pytest pytest-cov pytest-azurepipelines
       pytest acceptance_tests.py --cov=. --cov-report xml --maxfail=3
     displayName: 'Run Acceptance Tests with coverage'
 
   - script: |
+      # Eliminar node_modules y otros archivos innecesarios
+      rm -rf node_modules
+      rm -rf .git
+      rm -rf .vscode
+      rm -f *.log
+      rm -f .env
+      git clean -fdx
+    displayName: 'Compress project files excluding unnecessary files'
+
+  - script: |
       npm install -g vercel
-      vercel --token "$VERCEL_TOKEN" --prod --yes -p project.tar.gz
-    displayName: 'Deploy compressed project to Vercel'
+      vercel deploy --prod --yes --token "$VERCEL_TOKEN"
+    displayName: 'Deploy to Vercel'
     env:
       VERCEL_TOKEN: $(VERCEL_TOKEN)
+
 
     # Configurar git y subir el archivo a GitHub
   - script: |
