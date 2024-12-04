@@ -1,0 +1,13 @@
+__pycache__
+.pytest_cache
+.vscode
+.venv
+node_modules
+.env
+tests/
+coverage/
+*.log
+*.zip
+*.tar
+*.tar.gz
+*.db
