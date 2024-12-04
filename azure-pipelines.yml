@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 trigger:
-- main
+  - main
 
 pool:
   vmImage: ubuntu-latest
@@ -18,101 +18,102 @@ strategy:
       python.version: '3.11'
 
 steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(python.version)'
-  displayName: 'Use Python $(python.version)'
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '$(python.version)'
+    displayName: 'Use Python $(python.version)'
 
-- script: |
-    python -m pip install --upgrade pip
-    pip install -r requirements.txt
-  displayName: 'Install dependencies'
+  - script: |
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
+    displayName: 'Install dependencies'
 
-- script: |
-    # Obtener la versión de Chrome estable
-    CHROME_VERSION=$(google-chrome --version | cut -d ' ' -f 3 | cut -d '.' -f 1)
+  - script: |
+      # Obtener la versión de Chrome estable
+      CHROME_VERSION=$(google-chrome --version | cut -d ' ' -f 3 | cut -d '.' -f 1)
 
-    # Obtener la versión correspondiente de ChromeDriver
-    CHROMEDRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION})
+      # Obtener la versión correspondiente de ChromeDriver
+      CHROMEDRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION})
 
-    echo "Chrome Version: $CHROME_VERSION"
-    echo "ChromeDriver Version: $CHROMEDRIVER_VERSION"
+      echo "Chrome Version: $CHROME_VERSION"
+      echo "ChromeDriver Version: $CHROMEDRIVER_VERSION"
 
-    # Descargar ChromeDriver específico para la versión de Chrome
-    wget -N https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip -P ~/tmp
-    unzip ~/tmp/chromedriver_linux64.zip -d ~/tmp
-    sudo mv -f ~/tmp/chromedriver /usr/local/bin/chromedriver
-    sudo chown root:root /usr/local/bin/chromedriver
-    sudo chmod 0755 /usr/local/bin/chromedriver
+      # Descargar ChromeDriver específico para la versión de Chrome
+      wget -N https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip -P ~/tmp
+      unzip ~/tmp/chromedriver_linux64.zip -d ~/tmp
+      sudo mv -f ~/tmp/chromedriver /usr/local/bin/chromedriver
+      sudo chown root:root /usr/local/bin/chromedriver
+      sudo chmod 0755 /usr/local/bin/chromedriver
 
-    # Descargar e instalar Chrome estable
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-    sudo dpkg -i google-chrome-stable_current_amd64.deb
-    sudo apt-get install -f -y
+      # Descargar e instalar Chrome estable
+      wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      sudo dpkg -i google-chrome-stable_current_amd64.deb
+      sudo apt-get install -f -y
+    displayName: 'Install Compatible Chrome and ChromeDriver'
 
-    # Verificar versiones instaladas
-    google-chrome --version
-    chromedriver --version
-  displayName: 'Install Compatible Chrome and ChromeDriver'
+  - script: |
+      which google-chrome || echo "Google Chrome not found"
+      which chromedriver || echo "ChromeDriver not found"
+      google-chrome --version || echo "Unable to get Chrome version"
+      chromedriver --version || echo "Unable to get ChromeDriver version"
+    displayName: 'Check Chrome and ChromeDriver installation'
 
-- script: |
-    # Verificar instalaciones
-    which google-chrome
-    which chromedriver
-    google-chrome --version
-    chromedriver --version
-  displayName: 'Verify Chrome and ChromeDriver'
+  - script: |
+      nohup python app.py &
+      sleep 10
+      curl -I http://localhost:5000 || echo "Flask server not running"
+    displayName: 'Start and Verify Flask Server'
 
-- script: |
-    pip install pylint
-    pylint --exit-zero $(Build.SourcesDirectory)/tpi_ahorcado --output-format=parseable > $(Build.SourcesDirectory)/pylint-report.txt
-  displayName: 'Run Pylint Static Code Analysis'
+  - script: |
+      pip install pylint
+      pylint --exit-zero $(Build.SourcesDirectory)/tpi_ahorcado --output-format=parseable > $(Build.SourcesDirectory)/pylint-report.txt
+    displayName: 'Run Pylint Static Code Analysis'
 
-- script: |
-    pip install pytest pytest-cov pytest-azurepipelines
-    pytest --cov=. --cov-report xml
-  displayName: 'Run tests with coverage'
+  - script: |
+      pip install pytest pytest-cov pytest-azurepipelines
+      pytest --cov=. --cov-report xml
+    displayName: 'Run tests with coverage'
 
-- script: |
-    pip install -r requirements.txt
-    pip install pytest pytest-cov pytest-azurepipelines
-    pytest acceptance_tests.py --cov=. --cov-report xml
-  displayName: 'Run Acceptance Tests with coverage'
-  
-  # Configurar git y subir el archivo a GitHub 
-- script: |
-    # Configurar git
-    git config --global user.name "guillermodolan"
-    git config --global user.email "guillermo230899@gmail.com"
+  - script: |
+      pip install -r requirements.txt
+      pip install pytest pytest-cov pytest-azurepipelines
+      pytest acceptance_tests.py --cov=. --cov-report xml --maxfail=3
+    displayName: 'Run Acceptance Tests with coverage'
 
-    git clone https://$(GITHUB_TOKEN)@github.com/guillermodolan/metodologias_agiles.git $(Build.SourcesDirectory)/repo
+    # Configurar git y subir el archivo a GitHub
+  - script: |
+      # Configurar git
+      git config --global user.name "guillermodolan"
+      git config --global user.email "guillermo230899@gmail.com"
 
-    mv $(Build.SourcesDirectory)/pylint-report.txt $(Build.SourcesDirectory)/repo/
-    cd $(Build.SourcesDirectory)/repo
-    git add pylint-report.txt
-    git commit -m "Add pylint report"
-    git push origin main
-  displayName: 'Push Pylint Report to GitHub'
-  env:
-    GITHUB_TOKEN: $(GITHUB_TOKEN)
+      git clone https://$(GITHUB_TOKEN)@github.com/guillermodolan/metodologias_agiles.git $(Build.SourcesDirectory)/repo
 
-- task: PublishTestResults@2
-  inputs:
-    testResultsFiles: '**/test-*.xml'
-    testRunTitle: 'Publish Test Results'
-    testResultsFormat: 'JUnit'
-  displayName: 'Publish test results'
+      mv $(Build.SourcesDirectory)/pylint-report.txt $(Build.SourcesDirectory)/repo/
+      cd $(Build.SourcesDirectory)/repo
+      git add pylint-report.txt
+      git commit -m "Add pylint report"
+      git push origin main
+    displayName: 'Push Pylint Report to GitHub'
+    env:
+      GITHUB_TOKEN: $(GITHUB_TOKEN)
 
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Build.SourcesDirectory)/coverage.xml'
-    reportDirectory: '$(Build.SourcesDirectory)/coverage-report'
-  displayName: 'Publish Code Coverage Results'
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: '**/test-*.xml'
+      testRunTitle: 'Publish Test Results'
+      testResultsFormat: 'JUnit'
+    displayName: 'Publish test results'
 
-- task: PublishTestResults@2
-  inputs:
-    testResultsFiles: '**/test-acceptance*.xml'
-    testRunTitle: 'Acceptance Tests Results'
-    testResultsFormat: 'JUnit'
-  displayName: 'Publish Acceptance Test Results'
+  - task: PublishCodeCoverageResults@1
+    inputs:
+      codeCoverageTool: 'Cobertura'
+      summaryFileLocation: '$(Build.SourcesDirectory)/coverage.xml'
+      reportDirectory: '$(Build.SourcesDirectory)/coverage-report'
+    displayName: 'Publish Code Coverage Results'
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: '**/test-acceptance*.xml'
+      testRunTitle: 'Acceptance Tests Results'
+      testResultsFormat: 'JUnit'
+    displayName: 'Publish Acceptance Test Results'

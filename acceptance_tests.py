@@ -31,51 +31,31 @@ class TestAhorcadoAcceptance(unittest.TestCase):
     def setUp(self):
         try:
             # Intentar localizar ChromeDriver y Chrome
-            chrome_path = shutil.which('google-chrome')
-            chromedriver_path = shutil.which('chromedriver')
-
-            if not chrome_path:
-                chrome_path = '/usr/bin/google-chrome'
-            
-            if not chromedriver_path:
-                chromedriver_path = '/usr/local/bin/chromedriver'
+            chrome_path = shutil.which('google-chrome') or '/usr/bin/google-chrome'
+            chromedriver_path = shutil.which('chromedriver') or '/usr/local/bin/chromedriver'
 
             print(f"Chrome Path: {chrome_path}")
             print(f"ChromeDriver Path: {chromedriver_path}")
 
-            # Verificar si los archivos existen
-            if not os.path.isfile(chrome_path):
-                raise FileNotFoundError(f"Chrome not found at {chrome_path}")
-            
-            if not os.path.isfile(chromedriver_path):
-                raise FileNotFoundError(f"ChromeDriver not found at {chromedriver_path}")
-
             # Configuración del servicio
             service = Service(chromedriver_path)
-            
+
             # Opciones de Chrome
             options = webdriver.ChromeOptions()
-            
-            # Configuraciones para entornos de CI/CD
             options.binary_location = chrome_path
             options.add_argument('--headless')
             options.add_argument('--no-sandbox')
             options.add_argument('--disable-dev-shm-usage')
-            options.add_argument('--remote-debugging-port=9222')
-            options.add_argument('--disable-gpu')
             options.add_argument('--window-size=1920,1080')
-            
-            # Intentar inicializar el WebDriver
+
+            # Inicializar WebDriver
             self.driver = webdriver.Chrome(service=service, options=options)
-            
-            # Configurar tiempo de espera
             self.driver.implicitly_wait(10)
-            
-            # Navegar a la URL
+
+            # Verificar conexión al servidor Flask
             self.driver.get("http://localhost:5000")
-        
         except Exception as e:
-            print(f"Error completo en setUp: {traceback.format_exc()}")
+            print(f"Error en setUp: {traceback.format_exc()}")
             raise
 
     def tearDown(self):
