@@ -11,8 +11,6 @@ pool:
 
 variables:
   - group: GITHUB_TOKEN
-  - name: VERCEL_TOKEN
-    value: $(VERCEL_TOKEN)
 
 strategy:
   matrix:
