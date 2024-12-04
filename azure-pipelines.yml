@@ -11,6 +11,8 @@ pool:
 
 variables:
   - group: GITHUB_TOKEN
+  - name: VERCEL_TOKEN
+    value: $(VERCEL_TOKEN)
 
 strategy:
   matrix:
@@ -73,6 +75,14 @@ steps:
       pip install pytest pytest-cov pytest-azurepipelines
       pytest --cov=. --cov-report xml
     displayName: 'Run tests with coverage'
+
+    # Deploy a Vercel
+  - script: |
+      npm install -g vercel
+      vercel --token $(VERCEL_TOKEN) --prod
+    displayName: 'Deploy to Vercel'
+    env:
+      VERCEL_TOKEN: $(VERCEL_TOKEN)
 
   - script: |
       pip install -r requirements.txt
