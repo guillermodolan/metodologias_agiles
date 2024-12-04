@@ -84,13 +84,30 @@ steps:
       # Eliminar node_modules y otros archivos innecesarios
       rm -rf node_modules
       rm -rf .vscode
-      rm -f *.log
+      rm -rf .git
+      rm -rf tests
+      rm -rf __pycache__
+      rm -rf *.log
       rm -f .env
+      rm -f *.sqlite
+      rm -f *.db
     displayName: 'Compress project files excluding unnecessary files'
 
   - script: |
+      # Limpiar archivos grandes e innecesarios
+      find . -type d \( -name "node_modules" -o -name ".git" -o -name "__pycache__" \) -exec rm -rf {} +
+      find . -type f \( -name "*.log" -o -name "*.sqlite" -o -name "*.db" \) -delete
+      
+      # Crear .vercelignore
+      echo "node_modules/" > .vercelignore
+      echo ".git/" >> .vercelignore
+      echo "*.log" >> .vercelignore
+      echo "tests/" >> .vercelignore
+      echo "__pycache__/" >> .vercelignore
+
+      # Deploy a Vercel
       npm install -g vercel
-      vercel deploy --prod --yes --token "$VERCEL_TOKEN"
+      vercel deploy --prod --yes --token "$VERCEL_TOKEN" --build-env CI=1
     displayName: 'Deploy to Vercel'
     env:
       VERCEL_TOKEN: $(VERCEL_TOKEN)
