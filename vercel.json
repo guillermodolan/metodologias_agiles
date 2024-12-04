@@ -5,11 +5,11 @@
         "use": "@vercel/python"
       }
     ],
-    "ignore": [
-      "node_modules/",
-      ".git/",
-      ".vscode/",
-      "*.log",
-      ".env"
+    "routes": [
+      {
+        "src": "/.*",
+        "dest": "/app.py"
+      }
     ]
-  }
+}
+  
