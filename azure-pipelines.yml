@@ -81,34 +81,37 @@ steps:
     displayName: 'Run Acceptance Tests with coverage'
 
   - script: |
-      # Eliminar node_modules y otros archivos innecesarios
+      # Eliminar directorios grandes
       rm -rf node_modules
-      rm -rf .vscode
       rm -rf .git
-      rm -rf tests
       rm -rf __pycache__
       rm -rf *.log
-      rm -f .env
-      rm -f *.sqlite
-      rm -f *.db
-    displayName: 'Compress project files excluding unnecessary files'
-
-  - script: |
-      # Limpiar archivos grandes e innecesarios
-      find . -type d \( -name "node_modules" -o -name ".git" -o -name "__pycache__" \) -exec rm -rf {} +
-      find . -type f \( -name "*.log" -o -name "*.sqlite" -o -name "*.db" \) -delete
+      rm -rf .vscode
+      rm -rf .pytest_cache
+      rm -rf htmlcov
+      rm -rf .coverage
+      
+      # Limpiar archivos de compilación de Python
+      find . -type f -name "*.pyc" -delete
+      find . -type f -name "*.pyo" -delete
+      find . -type d -name "__pycache__" -exec rm -rf {} +
       
       # Crear .vercelignore
       echo "node_modules/" > .vercelignore
       echo ".git/" >> .vercelignore
       echo "*.log" >> .vercelignore
-      echo "tests/" >> .vercelignore
       echo "__pycache__/" >> .vercelignore
+      echo ".pytest_cache/" >> .vercelignore
+      echo "htmlcov/" >> .vercelignore
+      echo ".coverage" >> .vercelignore
+
+      # Verificar tamaño final
+      du -sh .
 
       # Deploy a Vercel
       npm install -g vercel
-      vercel deploy --prod --yes --token "$VERCEL_TOKEN" --build-env CI=1
-    displayName: 'Deploy to Vercel'
+      vercel deploy --prod --yes --token "$VERCEL_TOKEN"
+    displayName: 'Deploy to Vercel with Size Optimization'
     env:
       VERCEL_TOKEN: $(VERCEL_TOKEN)
 
