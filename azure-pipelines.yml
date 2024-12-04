@@ -76,10 +76,9 @@ steps:
       pytest --cov=. --cov-report xml
     displayName: 'Run tests with coverage'
 
-    # Deploy a Vercel
   - script: |
       npm install -g vercel
-      vercel --token $(VERCEL_TOKEN) --prod
+      vercel --token "$VERCEL_TOKEN" --prod
     displayName: 'Deploy to Vercel'
     env:
       VERCEL_TOKEN: $(VERCEL_TOKEN)
