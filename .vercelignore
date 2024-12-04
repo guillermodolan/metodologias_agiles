@@ -5,6 +5,8 @@ coverage/
 logs/
 cache/
 build/
+.git/
+.vscode/
 *.log
 *.zip
 *.tar
