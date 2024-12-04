@@ -144,26 +144,26 @@ class TestAhorcadoAcceptance(unittest.TestCase):
     # Done
     def test_falla_palabra_correcta(self):
         driver = self.driver
-        ahorcado = Ahorcado("arco")
+        palabra = "arco"
         palabra_input = WebDriverWait(driver, 10).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/input') ))
-        palabra_input.send_keys(ahorcado.palabra)
-        # time.sleep(2)
+        palabra_input.send_keys(palabra)
+        time.sleep(2)
         boton_configura = WebDriverWait(driver, 5).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[1]/form/button') ))
         boton_configura.click()
-        # time.sleep(2)
+        time.sleep(2)
         WebDriverWait(driver, 5).until(EC.alert_is_present())
         alerta = Alert(driver)
         alerta.accept()
-        # time.sleep(2)
+        time.sleep(2)
         ingresa_palabra_input = WebDriverWait(driver, 10).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[2]/form[2]/input') ))
         ingresa_palabra_input.send_keys('planta')
-        # time.sleep(2)
+        time.sleep(2)
         boton_envia_palabra = WebDriverWait(driver, 5).until( EC.presence_of_element_located( (By.XPATH, '/html/body/div[2]/form[2]/button') ))
         boton_envia_palabra.click()
-        # time.sleep(2)
+        time.sleep(2)
         vida_box = WebDriverWait(driver, 15).until(EC.visibility_of_element_located( (By.XPATH, '/html/body/div[2]/p[2]/span') ))
-        # time.sleep(2)
-        self.assertEqual(str(ahorcado.vidas), vida_box.text)
+        time.sleep(2)
+        self.assertEqual(str(5), vida_box.text)
        
     # Done
     def test_fin_de_vidas(self):
