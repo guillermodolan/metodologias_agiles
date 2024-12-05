@@ -80,22 +80,33 @@ steps:
       pytest acceptance_tests.py --cov=. --cov-report xml --maxfail=3
     displayName: 'Run Acceptance Tests with coverage'
 
-    # Configurar git y subir el archivo a GitHub
   - script: |
-      # Configurar git
       git config --global user.name "guillermodolan"
       git config --global user.email "guillermo230899@gmail.com"
 
       git clone https://$(GITHUB_TOKEN)@github.com/guillermodolan/metodologias_agiles.git $(Build.SourcesDirectory)/repo
 
-      mv $(Build.SourcesDirectory)/pylint-report.txt $(Build.SourcesDirectory)/repo/
+      cp -R $(Build.ArtifactStagingDirectory)/deploy $(Build.SourcesDirectory)/repo/deploy
       cd $(Build.SourcesDirectory)/repo
-      git add pylint-report.txt
-      git commit -m "Add pylint report"
+      git add deploy/
+      git commit -m "Update deployment artifacts"
       git push origin main
-    displayName: 'Push Pylint Report to GitHub'
+    displayName: 'Push Deploy Artifacts to GitHub'
     env:
       GITHUB_TOKEN: $(GITHUB_TOKEN)
+
+  - script: |
+    mkdir -p $(Build.ArtifactStagingDirectory)/deploy
+    cp -R $(Build.SourcesDirectory)/app.py $(Build.ArtifactStagingDirectory)/deploy/
+    cp -R $(Build.SourcesDirectory)/requirements.txt $(Build.ArtifactStagingDirectory)/deploy/
+  displayName: 'Prepare Deploy Artifact'
+
+  - task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: $(Build.ArtifactStagingDirectory)/deploy
+    artifact: deploy
+    publishLocation: 'pipeline'
+  displayName: 'Publish Deploy Artifact'
 
   - task: PublishTestResults@2
     inputs:
