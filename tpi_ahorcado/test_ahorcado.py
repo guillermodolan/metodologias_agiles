@@ -164,6 +164,7 @@ class Test(unittest.TestCase):
         self.assertIn(json_data['letra_comodin'], 'ayuda')
 
     def test_usar_dos_comodines(self):
+        """Test que verifica que no se utilicen 2 comodines"""
         # Compruebo que cuando intento usar 2 comodínes, el juego no me lo permite
         palabra = 'help'
         ahorcado = Ahorcado(palabra)
@@ -171,7 +172,7 @@ class Test(unittest.TestCase):
         self.assertEqual(ahorcado.uso_comodin(), None)
 
     def test_reiniciar(self):
-        # Compruebo que cuando presiono reiniciar el juego, este se reinicia correctamente desde la aplicación
+        """Test que verifica el reinicio del juego"""
         self.app.post('/configurar_palabra', data={'palabra': 'python'})
         response = self.app.post('/reiniciar')
         json_data = response.get_json()
