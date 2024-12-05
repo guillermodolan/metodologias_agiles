@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from Ahorcado import Ahorcado
+import os
 
 app = Flask(__name__)
 juego_actual = Ahorcado()
@@ -89,4 +90,6 @@ def reiniciar():
     return jsonify({"message": "Juego reiniciado."})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.getenv("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
+    # app.run(debug=True)
