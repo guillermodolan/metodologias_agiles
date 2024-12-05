@@ -96,10 +96,10 @@ steps:
       GITHUB_TOKEN: $(GITHUB_TOKEN)
 
   - script: |
-    mkdir -p $(Build.ArtifactStagingDirectory)/deploy
-    cp -R $(Build.SourcesDirectory)/app.py $(Build.ArtifactStagingDirectory)/deploy/
-    cp -R $(Build.SourcesDirectory)/requirements.txt $(Build.ArtifactStagingDirectory)/deploy/
-  displayName: 'Prepare Deploy Artifact'
+      mkdir -p $(Build.ArtifactStagingDirectory)/deploy
+      cp -R $(Build.SourcesDirectory)/app.py $(Build.ArtifactStagingDirectory)/deploy/
+      cp -R $(Build.SourcesDirectory)/requirements.txt $(Build.ArtifactStagingDirectory)/deploy/
+    displayName: 'Prepare Deploy Artifact'
 
   - task: PublishPipelineArtifact@1
   inputs:
