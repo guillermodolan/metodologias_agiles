@@ -14,10 +14,8 @@ class Test(unittest.TestCase):
         self.app.post('/configurar_palabra', data={'palabra': 'indice'})
         response = self.app.get('/')
         self.assertEqual(response.status_code, 200)
-        #self.assertIn(b'______', response.data) #Ver por qué falla
 
     def test_configurar_palabra(self):
-        # Compruebo que al configurar una palabra nueva, se inicien correctamente los datos del juego
         response = self.app.post('/configurar_palabra', data={'palabra': 'python'})
         self.assertEqual(response.status_code, 200)
         json_data = response.get_json()
@@ -49,7 +47,6 @@ class Test(unittest.TestCase):
         self.assertFalse(ahorcado.ingresar_letra(letra))
 
     def test_falla_letra_app(self):
-        # Compruebo que al ingresar una letra que no está en la palabra, no se considere válido desde la aplicación
         self.app.post('/configurar_palabra', data={'palabra': 'testea'})
         response = self.app.post('/ingresar_letra', data={'letra': 'g'})
         json_data = response.get_json()
@@ -66,7 +63,6 @@ class Test(unittest.TestCase):
         self.assertEqual(ahorcado.vidas, 5)
 
     def test_fin_de_vidas(self):
-        # Compruebo que al intentar 6 veces adivinar una letra y fallar siempre, pierdo todas las vidas
         palabra = 'perro'
         ahorcado = Ahorcado(palabra)
         letras = ['x','y','z','w','t','q']
@@ -75,7 +71,6 @@ class Test(unittest.TestCase):
         self.assertEqual(ahorcado.vidas, 0)
 
     def test_fin_de_vidas_app(self):
-        # Compruebo que al intentar 6 veces adivinar una letra y fallar siempre, pierdo todas las vidas desde la aplicación
         self.app.post('/configurar_palabra', data={'palabra': 'perro'})
         for letra in ['x', 'y', 'z', 'w', 't']:
             self.app.post('/ingresar_letra', data={'letra': letra})
@@ -93,7 +88,6 @@ class Test(unittest.TestCase):
         self.assertEqual(ahorcado.muestra_palabra(), 'destino')
 
     def test_acierta_palabra_correcta_app(self):
-        # Compruebo que al ingresar una palabra intentando adivinar y acierto, gano el juego desde la aplicación
         self.app.post('/configurar_palabra', data={'palabra': 'destino'})
         response = self.app.post('/arriesgar_palabra', data={'palabra_arriesga': 'destino'})
         json_data = response.get_json()
@@ -151,6 +145,7 @@ class Test(unittest.TestCase):
         self.assertFalse(ahorcado.ingresar_letra('5'))
 
     def test_usar_comodin(self):
+        """Test que verifica que el comodin funcione bien"""
         # Compruebo la funcionalidad de que cuando uso un comodín, este me devuelve una letra perteneciente a la palabra
         palabra = 'ayuda'
         ahorcado = Ahorcado(palabra)
