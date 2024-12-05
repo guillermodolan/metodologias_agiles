@@ -102,11 +102,11 @@ steps:
     displayName: 'Prepare Deploy Artifact'
 
   - task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: $(Build.ArtifactStagingDirectory)/deploy
-    artifact: deploy
-    publishLocation: 'pipeline'
-  displayName: 'Publish Deploy Artifact'
+    inputs:
+      targetPath: $(Build.ArtifactStagingDirectory)/deploy
+      artifact: deploy
+      publishLocation: 'pipeline'
+    displayName: 'Publish Deploy Artifact'
 
   - task: PublishTestResults@2
     inputs:
