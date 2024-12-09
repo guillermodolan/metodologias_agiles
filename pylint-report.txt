@@ -1,11 +1,9 @@
 ************* Module tpi_ahorcado
 tpi_ahorcado/__init__.py:1: [C0304(missing-final-newline), ] Final newline missing
 ************* Module tpi_ahorcado.test_ahorcado
-tpi_ahorcado/test_ahorcado.py:6: [C0303(trailing-whitespace), ] Trailing whitespace
-tpi_ahorcado/test_ahorcado.py:159: [C0301(line-too-long), ] Line too long (120/100)
 tpi_ahorcado/test_ahorcado.py:1: [C0114(missing-module-docstring), ] Missing module docstring
 tpi_ahorcado/test_ahorcado.py:5: [R0904(too-many-public-methods), Test] Too many public methods (23/20)
 
 -----------------------------------
-Your code has been rated at 9.63/10
+Your code has been rated at 9.78/10
 
