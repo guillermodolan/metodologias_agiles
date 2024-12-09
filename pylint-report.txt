@@ -1,0 +1,32 @@
+************* Module tpi_ahorcado
+tpi_ahorcado/__init__.py:1: [C0304(missing-final-newline), ] Final newline missing
+************* Module tpi_ahorcado.test_ahorcado
+tpi_ahorcado/test_ahorcado.py:105: [C0301(line-too-long), ] Line too long (112/100)
+tpi_ahorcado/test_ahorcado.py:149: [C0301(line-too-long), ] Line too long (120/100)
+tpi_ahorcado/test_ahorcado.py:155: [C0301(line-too-long), ] Line too long (140/100)
+tpi_ahorcado/test_ahorcado.py:1: [C0114(missing-module-docstring), ] Missing module docstring
+tpi_ahorcado/test_ahorcado.py:5: [C0115(missing-class-docstring), Test] Missing class docstring
+tpi_ahorcado/test_ahorcado.py:12: [C0116(missing-function-docstring), Test.test_index] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:18: [C0116(missing-function-docstring), Test.test_configurar_palabra] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:26: [C0116(missing-function-docstring), Test.test_acierta_letra] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:33: [C0116(missing-function-docstring), Test.test_acierta_letra_app] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:42: [C0116(missing-function-docstring), Test.test_falla_letra] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:49: [C0116(missing-function-docstring), Test.test_falla_letra_app] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:57: [C0116(missing-function-docstring), Test.test_falla_letra_descuenta_vida] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:65: [C0116(missing-function-docstring), Test.test_fin_de_vidas] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:73: [C0116(missing-function-docstring), Test.test_fin_de_vidas_app] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:82: [C0116(missing-function-docstring), Test.test_acierta_palabra_correcta] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:90: [C0116(missing-function-docstring), Test.test_acierta_palabra_correcta_app] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:96: [C0116(missing-function-docstring), Test.test_falla_palabra_correcta] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:104: [C0116(missing-function-docstring), Test.test_arriesgar_palabra_incorrecta] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:112: [C0116(missing-function-docstring), Test.test_muestra_palabra] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:120: [C0116(missing-function-docstring), Test.test_gana_juego] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:128: [C0116(missing-function-docstring), Test.test_guarda_letras_erradas] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:137: [C0116(missing-function-docstring), Test.test_verifica_caracter_especial] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:142: [C0116(missing-function-docstring), Test.test_verifica_numero] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:154: [C0116(missing-function-docstring), Test.test_usar_comodin_app] Missing function or method docstring
+tpi_ahorcado/test_ahorcado.py:5: [R0904(too-many-public-methods), Test] Too many public methods (23/20)
+
+-----------------------------------
+Your code has been rated at 8.06/10
+
