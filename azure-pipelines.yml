@@ -67,6 +67,7 @@ steps:
   - script: |
       pip install pylint
       pylint --exit-zero $(Build.SourcesDirectory)/tpi_ahorcado --output-format=parseable > $(Build.SourcesDirectory)/pylint-report.txt
+      echo "pylint-report.txt generado."
     displayName: 'Run Pylint Static Code Analysis'
 
   - script: |
@@ -81,17 +82,30 @@ steps:
     displayName: 'Run Acceptance Tests with coverage'
 
   - script: |
+      # Configuración de Git
       git config --global user.name "guillermodolan"
       git config --global user.email "guillermo230899@gmail.com"
 
+      # Clonar el repositorio
       git clone https://$(GITHUB_TOKEN)@github.com/guillermodolan/metodologias_agiles.git $(Build.SourcesDirectory)/repo
 
-      cp -R $(Build.ArtifactStagingDirectory)/deploy $(Build.SourcesDirectory)/repo/deploy
+      # Copiar los artefactos de despliegue al repositorio clonado
+      mkdir -p $(Build.SourcesDirectory)/repo/deploy
+      cp -R $(Build.ArtifactStagingDirectory)/deploy/* $(Build.SourcesDirectory)/repo/deploy/
+
+      # Copiar pylint-report.txt al repositorio raíz
+      cp $(Build.SourcesDirectory)/pylint-report.txt $(Build.SourcesDirectory)/repo/
+
+      # Navegar al repositorio clonado
       cd $(Build.SourcesDirectory)/repo
-      git add deploy/
-      git commit -m "Update deployment artifacts"
+
+      # Añadir cambios y hacer commit
+      git add .
+      git commit -m "Update deployment artifacts and pylint report"
+      
+      # Subir los cambios a la rama principal
       git push origin main
-    displayName: 'Push Deploy Artifacts to GitHub'
+    displayName: 'Push Updates (Deploy Artifacts & Pylint Report) to GitHub'
     env:
       GITHUB_TOKEN: $(GITHUB_TOKEN)
 
