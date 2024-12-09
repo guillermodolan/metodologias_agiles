@@ -64,9 +64,15 @@ steps:
       curl -I http://localhost:5000 || echo "Flask server not running"
     displayName: 'Start and Verify Flask Server'
 
+  # Instalar herramientas de análisis estático
   - script: |
-      pip install pylint
-      pylint --exit-zero $(Build.SourcesDirectory)/tpi_ahorcado --output-format=parseable > $(Build.SourcesDirectory)/pylint-report.txt
+      pip install pylint bandit
+    displayName: 'Install Static Analysis Tools'
+
+    # Análisis de código con Pylint
+  - script: |
+      pylint $(Build.SourcesDirectory)/tpi_ahorcado \
+        --output-format=junit > $(Build.SourcesDirectory)/pylint-report.xml
     displayName: 'Run Pylint Static Code Analysis'
 
   - script: |
@@ -128,3 +134,10 @@ steps:
       testRunTitle: 'Acceptance Tests Results'
       testResultsFormat: 'JUnit'
     displayName: 'Publish Acceptance Test Results'
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '$(Build.SourcesDirectory)/pylint-report.xml'
+      testRunTitle: 'Pylint Analysis Results'
+    displayName: 'Publish Pylint Results'
