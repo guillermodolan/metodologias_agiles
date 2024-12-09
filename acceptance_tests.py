@@ -15,19 +15,21 @@ from app import app
 
 
 class TestAhorcadoAcceptance(unittest.TestCase):
-
+    
+    """Setup de la automatización para pruebas locales"""
     # def setUp(self):
-    #    # driver_path = 'C:\\metodologias_agiles\\chromedriver.exe'
-    #    driver_path = '/usr/local/bin/chromedriver'
+    #    driver_path = 'C:\\metodologias_agiles\\chromedriver.exe'
     #    service = Service(driver_path)
     #    options = webdriver.ChromeOptions()
     #    options.add_argument('--start-maximized')
-    #    options.add_argument('--headless')
-    #    options.add_argument('--no-sandbox')
-    #    options.add_argument('--disable-dev-shm-usage')
+    #    """Comentar las siguientes líneas en caso de ocasionar errores en pruebas locales"""
+    #    # options.add_argument('--headless')
+    #    # options.add_argument('--no-sandbox')
+    #    # options.add_argument('--disable-dev-shm-usage')
     #    self.driver = webdriver.Chrome(service=service, options=options)
     #    self.driver.get("http://localhost:5000")
 
+    """Setup de la automatización para pruebas en el CI Server"""
     def setUp(self):
         try:
             # Intentar localizar ChromeDriver y Chrome
@@ -62,7 +64,7 @@ class TestAhorcadoAcceptance(unittest.TestCase):
         if hasattr(self, 'driver'):
             self.driver.quit()
 
-# Done
+    # Done
     def test_falla_letra(self):
         driver = self.driver
         palabra = "arco"
