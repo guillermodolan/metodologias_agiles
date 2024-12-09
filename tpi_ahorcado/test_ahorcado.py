@@ -3,7 +3,6 @@ from app import app
 from Ahorcado import Ahorcado
 
 class Test(unittest.TestCase):
-    
     """Clase implementada como módulo de tests de Back-End."""
 
     def setUp(self):
@@ -156,7 +155,6 @@ class Test(unittest.TestCase):
 
     def test_usar_comodin(self):
         """Test que verifica que el comodin funcione bien"""
-        # Compruebo la funcionalidad de que cuando uso un comodín, este me devuelve una letra perteneciente a la palabra
         palabra = 'ayuda'
         ahorcado = Ahorcado(palabra)
         self.assertIn(ahorcado.uso_comodin(), ahorcado.palabra)
