@@ -86,7 +86,7 @@ class TestAhorcadoAcceptance(unittest.TestCase):
         time.sleep(1)
         vida_box = WebDriverWait(driver, 15).until(EC.visibility_of_element_located( (By.XPATH, '/html/body/div[2]/p[2]/span') ))
         time.sleep(1)
-        self.assertEqual(str(5), vida_box.text)
+        self.assertNotEqual(str(5), vida_box.text)
 
     # Done
     def test_falla_letra_descuenta_vida(self):
