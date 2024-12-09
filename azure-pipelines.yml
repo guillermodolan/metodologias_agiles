@@ -66,20 +66,22 @@ steps:
 
   # Instalar herramientas de análisis estático
   - script: |
-      pip install pylint bandit
-    displayName: 'Install Static Analysis Tools'
+      pip install pylint pylint-json2junit
+    displayName: 'Install Pylint and JSON2JUnit'
 
     # Análisis de código con Pylint
   - script: |
       pylint $(Build.SourcesDirectory)/tpi_ahorcado \
-        --output-format=junit > $(Build.SourcesDirectory)/pylint-report.xml
-    displayName: 'Run Pylint Static Code Analysis'
+      --output-format=json > $(Build.SourcesDirectory)/pylint-report.json
+      pylint-json2junit -o $(Build.SourcesDirectory)/pylint-report.xml \
+      $(Build.SourcesDirectory)/pylint-report.json
+    displayName: 'Run Pylint and Convert to JUnit'
 
   - task: PublishTestResults@2
     inputs:
       testResultsFormat: 'JUnit'
       testResultsFiles: '$(Build.SourcesDirectory)/pylint-report.xml'
-      testRunTitle: 'Pylint Analysis Results'
+      testRunTitle: 'Pylint Static Analysis'
     displayName: 'Publish Pylint Results'
 
   - script: |
